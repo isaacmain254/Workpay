@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% load static%}
+
+{% block content %}
+<div class="">
+    <!-- herosection -->
+    <section class="container d-flex  " style="height: 70vh;">
+        <div class="w-50 d-flex flex-column justify-content-center">
+            <h1 class="py-3">Find & Hire Expert Freelancers</h1>
+            <p>Work with the best freelance talent from around Kenya on our secure flexible and cost effective platform
+            </p>
+            <div class="py-3 gap-5">
+                <button class="btn btn-success rounded-pill" type="button">Hire Freelancer</button>
+                <button class="btn btn-outline-success rounded-pill ms-4" type="button">Learn more</button>
+            </div>
+        </div>
+        <div class="w-50 hero_image">
+            <img src="{% static 'images/mechanic.png' %}" class="img-fluid  " alt="Mechanic ">
+        </div>
+    </section>
+
+    <!-- What we do section -->
+    <section class="container mb-5">
+        <h3 class="text-center">What we do</h3>
+        <p class="text-center">We connect you with highly skilled freelancers. We assess our freelancers to ensure <br>
+            they can provide quality services.</p>
+
+        <div class="row gap-5 justify-content-md-center my-5">
+            <div class="card text-center col-3 ">
+                <img src="{% static 'images/janitor.jpeg'%}" class="card-img-top d-block mx-auto"
+                    style="width: 12rem; height: 12rem;" alt="janitor">
+                <div class="card-body">
+                    <h5 class="card-title">Janitors</h5>
+                    <p class="card-text">1,000 Freelancers</p>
+                    <a href="#" class="link-success link-underline-opacity-0">Learn more &#8250;</a>
+                </div>
+            </div>
+            <div class="card text-center col-3">
+
+                <img src="{% static 'images/cosmetologist.jpeg' %}" class="card-img-top d-block mx-auto"
+                    style="width: 12rem; height: 12rem;" alt="cosmetologist">
+
+                <div class="card-body">
+                    <h5 class="card-title">Cosmetologists</h5>
+                    <p class="card-text">500 Freelancers</p>
+                    <a href="#" class="link-success link-underline-opacity-0">Learn more &#8250;</a>
+                </div>
+            </div>
+            <div class="card text-center col-3">
+                <img src="{% static 'images/electrician.jpeg' %}" class="card-img-top d-block mx-auto"
+                    style="width: 12rem; height: 12rem;" alt="electrician">
+                <div class="card-body">
+                    <h5 class="card-title">Electricians</h5>
+                    <p class="card-text">2,150 Freelancers</p>
+                    <a href="#" class="link-success link-underline-opacity-0">Learn more &#8250;</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row gap-5 justify-content-md-center">
+            <div class="card text-center col-3 border-success ">
+                <img src="{% static 'images/mechanic.png'%}" class="card-img-top d-block mx-auto"
+                    style="width: 12rem; height: 12rem;" alt="janitor">
+                <div class="card-body">
+                    <h5 class="card-title">Mechanics</h5>
+                    <p class="card-text">450 Freelancers</p>
+                    <a href="#" class="link-success link-underline-opacity-0">Learn more &#8250;</a>
+                </div>
+            </div>
+            <div class="card text-center col-3">
+
+                <img src="{% static 'images/painter.jpeg' %}" class="card-img-top d-block mx-auto"
+                    style="width: 12rem; height: 12rem;" alt="cosmetologist">
+
+                <div class="card-body">
+                    <h5 class="card-title">Painters</h5>
+                    <p class="card-text">120 Freelancers</p>
+                    <a href="#" class="link-success link-underline-opacity-0">Learn more &#8250;</a>
+                </div>
+            </div>
+            <div class="card text-center col-3">
+                <img src="{% static 'images/welder.jpeg' %}" class="card-img-top d-block mx-auto"
+                    style="width: 12rem; height: 12rem;" alt="electrician">
+                <div class="card-body">
+                    <h5 class="card-title">Welders</h5>
+                    <p class="card-text">57 Freelancers</p>
+                    <a href="#" class="link-success link-underline-opacity-0">Learn more &#8250;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our satisfied clents  -->
+    <section class="container mb-5">
+        <h3 class="text-center">Check our satisfied <br> clients</h3>
+
+        <div class="row justify-content-md-center my-5">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <div class="d-flex gap-2">
+                            <img src="{% static 'images/mainawambui.jpg' %}" class="img-fluid rounded-circle" width="40"
+                                height="40" alt="happy client">
+                            <p>Maina </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <div class="d-flex gap-2">
+                            <img src="{% static 'images/mainawambui.jpg' %}" class="img-fluid rounded-circle" width="40"
+                                height="40" alt="happy client">
+                            <p>Maina </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <div class="d-flex gap-2">
+                            <img src="{% static 'images/mainawambui.jpg' %}" class="img-fluid rounded-circle" width="40"
+                                height="40" alt="happy client">
+                            <p>Maina </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <div class="d-flex gap-2">
+                            <img src="{% static 'images/mainawambui.jpg' %}" class="img-fluid rounded-circle" width="40"
+                                height="40" alt="happy client">
+                            <p>Maina </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- contact us -->
+    <section class="container-fluid text-bg-dark">
+        <div class="container d-flex">
+            <div class="w-50 mt-5">
+                <h3>We'd love to have you join us!</h3>
+                <p>You don't need to spend hours online searching for job listing </p>
+                <p class="lead">Social media</p>
+                <div class="d-flex gap-3">
+                    <i class="fa-brands fa-telegram fa-lg"></i>
+                    <i class="fa-brands fa-twitter fa-lg"></i>
+                    <i class="fa-brands fa-linkedin-in fa-lg"></i>
+                    <i class="fa-brands fa-facebook fa-lg"></i>
+                </div>
+            </div>
+            <div class="w-50 mt-5 mb-3">
+                <h3>Contact Us</h3>
+                <form action="">
+                    <div class="mb-2">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name">
+                    </div>
+                    <div class="mb-2">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email">
+                    </div>
+                    <div class="mb-2">
+                        <label for="exampleFormControlTextarea1" class="form-label">Message</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                    <button class="btn btn-success rounded-pill" type="submit">Contact Us</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+</div>
+
+{% endblock %}
