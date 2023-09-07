@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-0at0nlz&q@g_i22zx4rwxml($hwrb58w8=ub!y2mw#oz5nozr=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -33,8 +33,11 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # my apps
     'marketplace',
-    'profiles',
-
+    'account',
+    # 3rd party apps
+    "crispy_forms",
+    "crispy_bootstrap5",
+    
     # Django apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -126,3 +129,24 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Authentication URL's
+LOGIN_REDIRECT_URL = 'index'
+
+LOGIN_URL = 'login'
+
+LOGOUT_URL = 'logout'
+
+# crispy-form
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# email server configurations
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'elliotlinkon@gmail.com'
+EMAIL_HOST_PASSWORD = 'lmyj tnhn kftq dkcs'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
