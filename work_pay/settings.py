@@ -137,7 +137,7 @@ LOGIN_URL = 'login'
 
 LOGOUT_URL = 'logout'
 
-# crispy-form
+# crispy-form config 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
@@ -150,3 +150,7 @@ EMAIL_HOST_USER = 'elliotlinkon@gmail.com'
 EMAIL_HOST_PASSWORD = 'lmyj tnhn kftq dkcs'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+# media file configurations
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
