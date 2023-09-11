@@ -6,16 +6,18 @@
 
 {% block content %}
 <div class="container-fluid">
-    <div class="container">
-        <h3>Edit your profile </h3>
-        <form method="post" enctype="multipart/form-data">
+    <div class="container mt-5 border border-secondary-subtle">
+        <h3 class="text-center">Edit your profile </h3>
+        <form method="post" enctype="multipart/form-data" class="w-75 mx-auto">
             {% csrf_token %}
             {{ profile_form|crispy }}
             {{ user_form|crispy }}
 
-            <input type="submit" value="Save changes" class="btn btn-success w-100 my-1 fs-5">
+            <input type="submit" value="Save changes" class="btn btn-success">
 
         </form>
     </div>
 </div>
 {% endblock %}
+
+{% block footer %}{% endblock %}

@@ -1,5 +1,14 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
     return render(request, 'marketplace/index.html')
+
+@login_required
+def client_page(request):
+    return render(request, 'marketplace/client.html')
+
+@login_required
+def freelancer_page(request):
+    return render(request, 'marketplace/freelancer.html')
