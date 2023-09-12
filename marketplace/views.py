@@ -10,5 +10,5 @@ def client_page(request):
     return render(request, 'marketplace/client.html')
 
 @login_required
-def freelancer_page(request):
-    return render(request, 'marketplace/freelancer.html')
+def jobs_page(request):
+    return render(request, 'marketplace/jobs.html')

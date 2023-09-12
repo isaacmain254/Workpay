@@ -59,14 +59,14 @@
                         width="40" height="40" alt="{{ request.user.username }}">
                     {% endif %}
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
                         <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
                     </ul>
                 </div>
                 {% else %}
                 <div class="d-flex gap-4">
                     <a href="{% url 'login' %}" class="btn btn-success rounded-pill px-4">Log In</a>
-                    <a href="{% url 'register' %}" class="btn btn-outline-success rounded-pill px-4">Sign
+                    <a href="{% url 'select-group' %}" class="btn btn-outline-success rounded-pill px-4">Sign
                         Up</a>
                 </div>
                 {% endif %}

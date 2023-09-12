@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid bg-secondary bg-opacity-10 pb-5" style="margin-top: 4%;">
+    <section class="container h-100 ">
+        <div class="position-relative py-3">
+            <a class="link-dark link-underline-opacity-0" href="#"><i class="fa-solid fa-arrow-left pe-2"></i>Back</a>
+            <a href="#" class="position-absolute end-0 link-dark link-underline-opacity-0"><i
+                    class="fa-solid fa-share-nodes pe-2"></i>Share
+                profile</a>
+        </div>
+        <div class="row ">
+            <!-- LHS of the grid column -->
+            <div class="col-4 px-3">
+                <!-- Personal information -->
+                <div class="bg-light rounded-1 p-3">
+                    <div class="d-flex justify-content-center align-items-center  flex-column">
+                        <img class="img-fluid rounded-circle  " src="{% static 'images/mainawambui.jpg' %}" width="160"
+                            height="160" alt="">
+                        <span class="fw-bold fs-6 pt-2 text-success ">Maina Wambui</span>
+                        <span class=" fw-light fs-6 ">UI/UX Designer</span>
+                        <!-- Edit profile -->
+                        <a href="{% url 'edit' %}" class="btn btn-outline-success rounded-pill my-3" type="button">Edit
+                            Profile</a>
+
+                    </div>
+                    <div>
+                        <h6>Phone</h6>
+                        <p class="w-100 border border-secondary p-2 rounded-1 border-opacity-25">+254 7689890-</p>
+                    </div>
+                    <div>
+                        <h6>Email</h6>
+                        <p class="w-100 border border-secondary p-2 rounded-1 border-opacity-25">mainaWambui@gmail.com
+                        </p>
+                    </div>
+                    <div>
+                        <h6>Location</h6>
+                        <p class="w-100 border border-secondary p-2 rounded-1 border-opacity-25">muthaiga</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RHS of the column  -->
+            <div class="col-8 px-3">
+                <!-- About me section -->
+                <div class="bg-light rounded-1 w-100 p-3 ">
+                    <h4 class="text-dark">About me</h4>
+                    <p class="">
+                        Full stack product designer with hands on experiance in solving problem for clients ranging from
+                        Real Estate, Hospitality, Rentals , HealthCare, IT Sevices & Social Network among others. I've
+                        great
+                        communication skills, well-defined processing of information and keen to details, a toolkit for
+                        collaboration and user centered approach in design.
+                    </p>
+                </div>
+
+                <!-- skills section -->
+                <div class="bg-light rounded-1 w-100 my-4 p-3 ">
+                    <h4>skills</h4>
+                    <div class="d-flex flex-wrap gap-3">
+                        <span class="border border-success py-2 px-3 rounded-pill m1">User interface design</span>
+                        <span class="border border-success py-2 px-3  rounded-pill m1">UI</span>
+                        <span class="border border-success py-2 px-3  rounded-pill m1">UX</span>
+                        <span class="border border-success py-2 px-3  rounded-pill m1">Adobe XD</span>
+                        <span class="border border-success py-2 px-3  rounded-pill m1">Wireframing</span>
+                        <span class="border border-success py-2 px-3  rounded-pill m1">User Research</span>
+                        <span class="border border-success py-2 px-3  rounded-pill m1">Mobile Design</span>
+                    </div>
+                </div>
+
+                <!-- Project section -->
+                <div class="bg-light rounded-1 w-100 my-4 p-3 ">
+                    <h4>Projects</h4>
+                    <div class="d-flex flex-wrap gap-5">
+                        <div class="card text-center  border-success ">
+                            <img src="{% static 'images/mechanic.png'%}" class="card-img-top d-block mx-auto"
+                                style="width: 12rem; height: 12rem;" alt="janitor">
+                            <div class="card-body">
+                                <p class="card-text">well-defined processing of information and keen to details, a
+                                    toolkit for
+                                    collaboration and user centered approach in design.</p>
+                            </div>
+                        </div>
+                        <div class="card text-center  border-success ">
+                            <img src="{% static 'images/mechanic.png'%}" class="card-img-top d-block mx-auto"
+                                style="width: 12rem; height: 12rem;" alt="janitor">
+                            <div class="card-body">
+
+                                <p class="card-text">450 Freelancers</p>
+                            </div>
+                        </div>
+                        <div class="card text-center  border-success ">
+                            <img src="{% static 'images/mechanic.png'%}" class="card-img-top d-block mx-auto"
+                                style="width: 12rem; height: 12rem;" alt="janitor">
+                            <div class="card-body">
+
+                                <p class="card-text">450 Freelancers</p>
+
+                            </div>
+                        </div>
+                        <div class="card text-center  border-success ">
+                            <img src="{% static 'images/mechanic.png'%}" class="card-img-top d-block mx-auto"
+                                style="width: 12rem; height: 12rem;" alt="janitor">
+                            <div class="card-body">
+
+                                <p class="card-text">450 Freelancers</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

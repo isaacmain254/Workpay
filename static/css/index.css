@@ -27,6 +27,7 @@
 .card a:hover {
     color: #35960e !important;
 }
-/* footer a {
-    color: #fff !important;
-} */ 
+.text-success {
+    color: #3ab807 !important;
+}
+

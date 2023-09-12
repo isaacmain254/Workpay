@@ -1,12 +1,18 @@
 from django.shortcuts import render, redirect
-from .forms import UserRegistrationForm,UserLoginForm, UserEditForm, ProfileEditForm, UserProfileForm
+from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm, UserProfileForm
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from .models import Profile
 
-# Create your views here.
+
+# view for user to select group when  navbar  Register button is clicked
+# User to select a group before registering
+def select_group(request):
+    return render(request, 'account/select_group.html')
+
+
 def register(request):
     role = request.GET.get('role')
     print(role)
@@ -21,6 +27,7 @@ def register(request):
             new_user.save()
             # create the user profile 
             Profile.objects.create(user=new_user)
+            # Assign user to a group freelancer/client
             group = Group.objects.get(name=role)
             new_user.groups.add(group)
             return render(request, 'account/register_done.html', {'new_user': new_user})
@@ -28,20 +35,20 @@ def register(request):
         user_form = UserRegistrationForm()
     return render(request, 'account/register.html', {'user_form': user_form})
 
-# login 
-def user_login(request):
-    if request.method == 'POST':
-        form = UserLoginForm(request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-            user = authenticate(request, username=cd['username'], password=cd['password'])
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return redirect('marketplace/client.html')
-    else: 
-        form = UserLoginForm()
-    return render(request, 'account/login.html', {'form': form})
+
+# login redirect view w.r.t user group that is client or freelancer
+def login_success(request):
+    """
+    Redirect users based on whether they are clients or admins
+    """
+    if request.user.groups.filter(name="client").exists():
+        # user is a client 
+        return redirect('client')
+    else:
+        # user is a freelancer
+        return redirect('jobs')
+
+
 
 # edit user profile details view
 @login_required
@@ -61,16 +68,17 @@ def edit(request):
     context = {'user_form': user_form, 'profile_form': profile_form}
     return render(request, 'account/edit.html', context)
 
+@login_required
 def user_profile(request):
-    if request.method == 'POST':
-        form = ProfileEditForm(instance=request.user.profile, data=request.POST, files=request.FILES)
-        if form.is_valid():
-            form.save()
-            # user = form.save()
-            # group = form.cleaned_data['group']
-            # group.user_set.add(user)
-            return redirect('marketplace/index')
+    # if request.method == 'POST':
+    #     form = ProfileEditForm(instance=request.user.profile, data=request.POST, files=request.FILES)
+    #     if form.is_valid():
+    #         form.save()
+    #         # user = form.save()
+    #         # group = form.cleaned_data['group']
+    #         # group.user_set.add(user)
+    #         return redirect('marketplace/index')
     
-    else:
-        form = ProfileEditForm(instance=request.user.profile)
-    return render(request, 'account/profile.html', {'form': form})
+    # else:
+    #     form = ProfileEditForm(instance=request.user.profile)
+    return render(request, 'account/profile.html')
