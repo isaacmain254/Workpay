@@ -43,7 +43,7 @@ def login_success(request):
     """
     if request.user.groups.filter(name="client").exists():
         # user is a client 
-        return redirect('client')
+        return redirect('freelancers')
     else:
         # user is a freelancer
         return redirect('jobs')

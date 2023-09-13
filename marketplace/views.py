@@ -7,7 +7,7 @@ def index(request):
 
 @login_required
 def client_page(request):
-    return render(request, 'marketplace/client.html')
+    return render(request, 'marketplace/freelancers.html')
 
 @login_required
 def jobs_page(request):
