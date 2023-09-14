@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
-from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm, UserProfileForm
+from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm,BioEditForm, SkillsEditForm
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import Group
-from .models import Profile
+from django.contrib.auth.models import Group, User
+from .models import Profile, Bio
+
 
 
 # view for user to select group when  navbar  Register button is clicked
@@ -68,17 +69,32 @@ def edit(request):
     context = {'user_form': user_form, 'profile_form': profile_form}
     return render(request, 'account/edit.html', context)
 
+# user profile 
 @login_required
-def user_profile(request):
-    # if request.method == 'POST':
-    #     form = ProfileEditForm(instance=request.user.profile, data=request.POST, files=request.FILES)
-    #     if form.is_valid():
-    #         form.save()
-    #         # user = form.save()
-    #         # group = form.cleaned_data['group']
-    #         # group.user_set.add(user)
-    #         return redirect('marketplace/index')
-    
-    # else:
-    #     form = ProfileEditForm(instance=request.user.profile)
-    return render(request, 'account/profile.html')
+def user_profile(request, user_id):
+    user = User.objects.get(id=user_id)
+    bios = user.bio_set.all()
+    projects = user.project_set.all()
+    skills = user.skill_set.all()
+    context = {'user': user, 'bios': bios, 'projects': projects, 'skills': skills}
+    return render(request, 'account/profile.html', context)
+
+# edit user profession details(bio)
+@login_required
+def edit_bio(request):
+    if request.method == 'POST':
+        bio_form = BioEditForm(instance=request.user.bio, data=request.POST)
+        skills_form = SkillsEditForm(instance=request.user.skill, data=request.POST)
+
+        if bio_form.is_valid() and skills_form.is_valid():
+            bio_form.save()
+            skills_form.save()
+            return redirect('index')
+        
+    else:
+        bio_form = BioEditForm(instance=request.user.bio)
+        skills_form = SkillsEditForm(instance=request.user.skill)
+    return render(request, 'account/edit-bio.html', {'bio_form': bio_form, 'skills_form': skills_form})
+
+
+

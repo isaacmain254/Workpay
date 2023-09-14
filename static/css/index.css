@@ -27,7 +27,10 @@
 .card a:hover {
     color: #35960e !important;
 }
-.text-success {
+.text-success, .link-success {
     color: #3ab807 !important;
+}
+.link-success:hover, .link-success:focus, .link-success:active {
+    color: #35960e;
 }
 

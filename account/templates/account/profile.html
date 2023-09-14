@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+{% for bio in bios %}
 <div class="container-fluid bg-secondary bg-opacity-10 pb-5" style="margin-top: 4%;">
     <section class="container h-100 ">
         <div class="position-relative py-3">
@@ -15,34 +16,40 @@
             <div class="col-4 px-3">
                 <!-- Personal information -->
                 <div class="bg-light rounded-1 p-3">
+                    <p class="fw-semibold text-success fs-5 lh-sm text-end">$ {{ bio.hourly_rate }} <span
+                            class="fw-light text-secondary fs-6">per hour</span>
+                    </p>
                     <div class="d-flex justify-content-center align-items-center  flex-column">
-                        <img class="img-fluid rounded-circle  " src="{% static 'images/mainawambui.jpg' %}" width="160"
+
+                        <img class="img-fluid rounded-circle  " src="{{ user.profile.profile_image.url }}" width="160"
                             height="160" alt="">
-                        <span class="fw-bold fs-6 pt-2 text-success ">Maina Wambui</span>
-                        <span class=" fw-light fs-6 ">UI/UX Designer</span>
+                        <p class="fw-bold fs-6 pt-2 text-success ">{{ user.first_name | default:user.username }}
+                            {{ user.last_name }}</p>
+                        <span class=" fw-light fs-6 ">{{ bio.profession }}</span>
                         <!-- Edit profile -->
                         <a href="{% url 'edit' %}" class="btn btn-outline-success rounded-pill my-3" type="button">Edit
                             Profile</a>
                     </div>
-                    <p class="fw-semibold text-success fs-5 lh-sm text-end">$ 300 <span
-                            class="fw-light text-secondary fs-6">per hour</span>
-                    </p>
+
                     <div>
                         <h6>Phone</h6>
-                        <p class="w-100 border border-secondary p-2 rounded-1 border-opacity-25">+254 7689890-</p>
+                        <p class="w-100 border border-secondary p-2 rounded-1 border-opacity-25">
+                            {{ user.profile.phone_number }}</p>
                     </div>
                     <div>
                         <h6>Email</h6>
-                        <p class="w-100 border border-secondary p-2 rounded-1 border-opacity-25">mainaWambui@gmail.com
+                        <p class="w-100 border border-secondary p-2 rounded-1 border-opacity-25">{{ user.email }}
                         </p>
                     </div>
                     <div>
-                        <h6>Location</h6>
-                        <p class="w-100 border border-secondary p-2 rounded-1 border-opacity-25">muthaiga</p>
+                        <h6>City</h6>
+                        <p class="w-100 border border-secondary p-2 rounded-1 border-opacity-25">{{ user.profile.city }}
+                        </p>
                     </div>
                     <div>
                         <h6>Country</h6>
-                        <p class="w-100 border border-secondary p-2 rounded-1 border-opacity-25">Kenya</p>
+                        <p class="w-100 border border-secondary p-2 rounded-1 border-opacity-25">
+                            {{ user.profile.country }}</p>
                     </div>
                 </div>
             </div>
@@ -51,27 +58,28 @@
             <div class="col-8 px-3">
                 <!-- About me section -->
                 <div class="bg-light rounded-1 w-100 p-3 ">
-                    <h4 class="text-dark">About me</h4>
-                    <p class="">
-                        Full stack product designer with hands on experiance in solving problem for clients ranging from
-                        Real Estate, Hospitality, Rentals , HealthCare, IT Sevices & Social Network among others. I've
-                        great
-                        communication skills, well-defined processing of information and keen to details, a toolkit for
-                        collaboration and user centered approach in design.
-                    </p>
+                    <div class="d-flex justify-content-between">
+                        <h4 class="text-dark">About me</h4>
+                        <!-- Edit bio -->
+                        <a href="{% url 'edit-bio' %}" class="btn btn-outline-success rounded-pill" type="button">Edit
+                            bio</a>
+                    </div>
+                    <p class=""> {{ bio.bio }} </p>
                 </div>
 
                 <!-- skills section -->
                 <div class="bg-light rounded-1 w-100 my-4 p-3 ">
                     <h4>skills</h4>
                     <div class="d-flex flex-wrap gap-3">
-                        <span class="border border-success py-2 px-3 rounded-pill m1">User interface design</span>
-                        <span class="border border-success py-2 px-3  rounded-pill m1">UI</span>
+                        {% for skill in skills %}
+                        <span class="border border-success py-2 px-3 rounded-pill m1">{{ skill.title }}</span>
+                        <!-- <span class="border border-success py-2 px-3  rounded-pill m1">UI</span>
                         <span class="border border-success py-2 px-3  rounded-pill m1">UX</span>
                         <span class="border border-success py-2 px-3  rounded-pill m1">Adobe XD</span>
                         <span class="border border-success py-2 px-3  rounded-pill m1">Wireframing</span>
                         <span class="border border-success py-2 px-3  rounded-pill m1">User Research</span>
-                        <span class="border border-success py-2 px-3  rounded-pill m1">Mobile Design</span>
+                        <span class="border border-success py-2 px-3  rounded-pill m1">Mobile Design</span> -->
+                        {% endfor %}
                     </div>
                 </div>
 
@@ -79,45 +87,25 @@
                 <div class="bg-light rounded-1 w-100 my-4 p-3 ">
                     <h4>Projects</h4>
                     <div class="d-flex flex-wrap gap-5">
+                        {% for project in projects %}
                         <div class="card text-center  border-success ">
-                            <img src="{% static 'images/mechanic.png'%}" class="card-img-top d-block mx-auto"
-                                style="width: 12rem; height: 12rem;" alt="janitor">
+                            {% if project.project_image %}
+                            <img src="{{ project.project_image.url }}" class="card-img-top d-block mx-auto"
+                                style="width: 12rem; height: 12rem;" alt="{{ project.title }}">
+                            {% else %}
+                            <img src="{% static 'images/thumbnail.svg' %}" class="card-img-top d-block mx-auto"
+                                style="width: 12rem; height: 12rem;" alt="{{ project.title }}">
+                            {% endif %}
                             <div class="card-body">
-                                <p class="card-text">well-defined processing of information and keen to details, a
-                                    toolkit for
-                                    collaboration and user centered approach in design.</p>
+                                <p class="card-text">{{ project.title }}</p>
                             </div>
                         </div>
-                        <div class="card text-center  border-success ">
-                            <img src="{% static 'images/mechanic.png'%}" class="card-img-top d-block mx-auto"
-                                style="width: 12rem; height: 12rem;" alt="janitor">
-                            <div class="card-body">
-
-                                <p class="card-text">450 Freelancers</p>
-                            </div>
-                        </div>
-                        <div class="card text-center  border-success ">
-                            <img src="{% static 'images/mechanic.png'%}" class="card-img-top d-block mx-auto"
-                                style="width: 12rem; height: 12rem;" alt="janitor">
-                            <div class="card-body">
-
-                                <p class="card-text">450 Freelancers</p>
-
-                            </div>
-                        </div>
-                        <div class="card text-center  border-success ">
-                            <img src="{% static 'images/mechanic.png'%}" class="card-img-top d-block mx-auto"
-                                style="width: 12rem; height: 12rem;" alt="janitor">
-                            <div class="card-body">
-
-                                <p class="card-text">450 Freelancers</p>
-
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </div>
+{% endfor %}
 {% endblock %}

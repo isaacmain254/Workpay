@@ -1,12 +1,16 @@
 from django import forms
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile
+from .models import Profile, Project, Bio, Skill
+from phonenumber_field.formfields import PhoneNumberField
+from phonenumber_field.widgets import PhoneNumberPrefixWidget
 
 
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Repeat password', widget=forms.PasswordInput)
+    # group = forms.ModelChoiceField(queryset=Group.objects.all())
+
 
     class Meta:
         model = User
@@ -23,13 +27,23 @@ class UserEditForm(forms.ModelForm):
         model = User
         fields = ['first_name', 'last_name', 'email']
 class ProfileEditForm(forms.ModelForm):
-    class Meta:
+    phone_number = PhoneNumberField(region='CA', widget=PhoneNumberPrefixWidget())
+    
+    class Meta:       
         model = Profile
-        fields = ['profile_image']
+        fields = ['profile_image', 'phone_number', 'country', 'city']
 
-class UserProfileForm(forms.Form):
-    # group = forms.ModelChoiceField(queryset=Group.objects.all(), required=True)
-
+class BioEditForm(forms.ModelForm):
     class Meta:
-        model = Profile
-        fields = ['profile_image']
+        model = Bio
+        fields= ['profession', 'bio', 'hourly_rate']
+
+class SkillsEditForm(forms.ModelForm):
+    class Meta:
+        model = Skill
+        fields = ['title']
+
+class ProjectEditForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ['title', 'description', 'project_image']

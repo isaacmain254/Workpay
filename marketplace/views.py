@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from account.models import Profile
 
 # Create your views here.
 def index(request):

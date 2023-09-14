@@ -10,7 +10,8 @@ urlpatterns = [
     # login redirect
     path('', views.login_success, name='login-success'),
     path('edit/', views.edit, name='edit'),
-    path('profile/', views.user_profile, name='profile'),
+    path('profile/<int:user_id>/', views.user_profile, name='profile'),
+    path('edit-bio/', views.edit_bio, name='edit-bio'),
 
     path('select-group/', views.select_group, name='select-group'),
 ]
