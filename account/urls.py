@@ -11,7 +11,9 @@ urlpatterns = [
     path('', views.login_success, name='login-success'),
     path('edit/', views.edit, name='edit'),
     path('profile/<int:user_id>/', views.user_profile, name='profile'),
-    path('edit-bio/', views.edit_bio, name='edit-bio'),
+    path('edit-bio/<int:user_id>/', views.edit_bio, name='edit-bio'),
+    path('add-project/', views.add_project, name='add-project'),
+    path('edit-project/<int:project_id>/', views.edit_project, name='edit-project'),
 
     path('select-group/', views.select_group, name='select-group'),
 ]

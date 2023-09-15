@@ -1,6 +1,7 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 <div class="container-fluid bg-secondary bg-opacity-10 pb-5" style="margin-top: 4%">
     <section class="container h-100 py-3">
+
         <h3 class="">Find Jobs you love</h3>
         <div class="row">
             <!-- LHS grid column -->
@@ -17,6 +18,38 @@
 
                 <!-- jobs list -->
                 <div class="bg-light rounded-1">
+
+                    {% for job in jobs %}
+                    <div class="w-100 px-4 pt-4 mt-3">
+                        <div class="d-flex justify-content-between">
+                            <a class="link-success link-underline-opacity-0 fs-4 text-success" href="">
+                                {{ job.title }}
+                            </a>
+                            <p class="text-secondary fs-6">
+                                Budget
+                                <span class="fw-medium text-success fs-5 ps-2"> ${{ job.budget }}</span>
+                            </p>
+                        </div>
+                        <p class="fs-6 fw-light">
+                            {% if job.description|length > 350 %}
+                            {{ job.description|slice:":350" }}... <a href="#">Read More</a>
+                            {% else %}
+                            {{ job.description }}
+                            {% endif %}
+
+                        </p>
+                        <div class="d-flex flex-wrap gap-3 w-100 py-2">
+                            {% for skill in job.required_skills.all %}
+                            <span class="border border-opacity-25 border-success py-1 px-2 rounded-pill m1 fw-light">
+                                {{ skill.required_skill }}
+                            </span>
+
+                            {% endfor %}
+                        </div>
+                        <small class="text-secondary">{{ job.created|timesince }} ago</small>
+                    </div>
+                    <hr />
+                    {% endfor %}
                     <div class="w-100 px-4 pt-4 mt-3">
                         <div class="d-flex justify-content-between">
                             <a class="link-success link-underline-opacity-0 fs-4 text-success" href="">React
@@ -62,90 +95,6 @@
                                 Design</span>
                         </div>
                         <small class="text-secondary">Posted 24 hours ago</small>
-                    </div>
-                    <hr />
-                    <div class="w-100 px-4 pt-4 mt-3">
-                        <div class="d-flex justify-content-between">
-                            <a class="link-success link-underline-opacity-0 fs-4 text-success" href="">React
-                                developer</a>
-                            <p class="fs-5 text-secondary fs-6">
-                                Budget
-                                <span class="fw-semibold text-success fs-4 bs-2"> $300</span>
-                            </p>
-                        </div>
-                        <p class="fs-6 fw-light">
-                            Our team is looking for an experience bubble.io developer to help
-                            with dealing with smaller tasks/bug fixes on implementing design
-                            features in our app. This will be 5-10 hours a week. Our app deals
-                            with content management, images/videos and text. Let us know if
-                            you might be a good candidate for this role? Thanks
-                        </p>
-                        <div class="d-flex flex-wrap gap-3 w-100 py-2">
-                            <span class="border border-success py-1 px-2 rounded-pill m1 fw-light">User interface
-                                design</span>
-                            <span class="border border-success py-1 px-2 rounded-pill m1 fw-light">UI</span>
-                            <span class="border border-success py-1 px-2 rounded-pill m1 fw-light">UX</span>
-                            <span class="border border-success py-1 px-2 rounded-pill m1 fw-light">Adobe XD</span>
-                            <span class="border border-success py-1 px-2 rounded-pill m1 fw-light">Wireframing</span>
-                            <span class="border border-success py-1 px-2 rounded-pill m1 fw-light">User Research</span>
-                            <span class="border border-success py-1 px-2 rounded-pill m1 fw-light">Mobile Design</span>
-                            <span class="border border-success py-1 px-2 rounded-pill m1 fw-light">Wireframing</span>
-                            <span class="border border-success py-1 px-2 rounded-pill m1 fw-light">User Research</span>
-                            <span class="border border-success py-1 px-2 rounded-pill m1 fw-light">Mobile Design</span>
-                        </div>
-                        <small class="text-secondary">Posted 24 hours ago</small>
-                    </div>
-                    <hr />
-
-                    <hr />
-                    <div class="w-100 p-4">
-                        <div class="d-flex justify-content-between">
-                            <a class="link-success link-underline-opacity-0 fs-4" href="#">React developer</a>
-                            <p class="fs-5 text-secondary">
-                                Budget <span class="text-dark fw-semibold">$300</span>
-                            </p>
-                        </div>
-                        <p>
-                            Our team is looking for an experience bubble.io developer to help
-                            with dealing with smaller tasks/bug fixes on implementing design
-                            features in our app. This will be 5-10 hours a week. Our app deals
-                            with content management, images/videos and text. Let us know if
-                            you might be a good candidate for this role? Thanks
-                        </p>
-                        <div class="d-flex flex-wrap gap-3">
-                            <span class="border border-success py-1 px-2 rounded-pill m1">User interface design</span>
-                            <span class="border border-success py-1 px-2 rounded-pill m1">UI</span>
-                            <span class="border border-success py-1 px-2 rounded-pill m1">UX</span>
-                            <span class="border border-success py-1 px-2 rounded-pill m1">Adobe XD</span>
-                            <span class="border border-success py-1 px-2 rounded-pill m1">Wireframing</span>
-                            <span class="border border-success py-1 px-2 rounded-pill m1">User Research</span>
-                            <span class="border border-success py-1 px-2 rounded-pill m1">Mobile Design</span>
-                        </div>
-                    </div>
-                    <hr />
-                    <div class="w-100 p-3">
-                        <div class="d-flex justify-content-between">
-                            <a class="link-success link-underline-opacity-0 fs-4" href="#">React developer</a>
-                            <p class="fs-5 text-secondary">
-                                Budget <span class="text-dark fw-semibold">$300</span>
-                            </p>
-                        </div>
-                        <p>
-                            Our team is looking for an experience bubble.io developer to help
-                            with dealing with smaller tasks/bug fixes on implementing design
-                            features in our app. This will be 5-10 hours a week. Our app deals
-                            with content management, images/videos and text. Let us know if
-                            you might be a good candidate for this role? Thanks
-                        </p>
-                        <div class="d-flex flex-wrap gap-3">
-                            <span class="border border-success py-1 px-2 rounded-pill m1">User interface design</span>
-                            <span class="border border-success py-1 px-2 rounded-pill m1">UI</span>
-                            <span class="border border-success py-1 px-2 rounded-pill m1">UX</span>
-                            <span class="border border-success py-1 px-2 rounded-pill m1">Adobe XD</span>
-                            <span class="border border-success py-1 px-2 rounded-pill m1">Wireframing</span>
-                            <span class="border border-success py-1 px-2 rounded-pill m1">User Research</span>
-                            <span class="border border-success py-1 px-2 rounded-pill m1">Mobile Design</span>
-                        </div>
                     </div>
                     <hr />
                 </div>

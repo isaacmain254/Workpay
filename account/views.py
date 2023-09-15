@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
-from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm,BioEditForm, SkillsEditForm
+from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm,BioEditForm, SkillsEditForm, ProjectUpdateForm
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group, User
-from .models import Profile, Bio
+from .models import Profile, Bio, Skill, Project
+from django.views.generic import UpdateView
 
 
 
@@ -28,6 +29,8 @@ def register(request):
             new_user.save()
             # create the user profile 
             Profile.objects.create(user=new_user)
+            Bio.objects.create(user=new_user)
+            Skill.objects.create(user_bio=new_user)
             # Assign user to a group freelancer/client
             group = Group.objects.get(name=role)
             new_user.groups.add(group)
@@ -61,7 +64,7 @@ def edit(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-        return redirect('index')
+        return redirect('profile',request.user.id)
 
     else: 
         user_form = UserEditForm(instance=request.user)
@@ -81,20 +84,60 @@ def user_profile(request, user_id):
 
 # edit user profession details(bio)
 @login_required
-def edit_bio(request):
+def edit_bio(request, user_id): 
+    bio = Bio.objects.get(user_id=user_id)
+    user = bio.user
+    # uid = user.id
+    skills = Skill.objects.get(user_bio_id=user_id)
     if request.method == 'POST':
-        bio_form = BioEditForm(instance=request.user.bio, data=request.POST)
-        skills_form = SkillsEditForm(instance=request.user.skill, data=request.POST)
+        bio_form = BioEditForm(instance=bio, data=request.POST)
+        skills_form = SkillsEditForm(instance=skills, data=request.POST)
 
         if bio_form.is_valid() and skills_form.is_valid():
             bio_form.save()
             skills_form.save()
-            return redirect('index')
+            return redirect('profile', user.id)
         
     else:
-        bio_form = BioEditForm(instance=request.user.bio)
-        skills_form = SkillsEditForm(instance=request.user.skill)
+        bio_form = BioEditForm(instance=bio)
+        skills_form = SkillsEditForm(instance=skills)
     return render(request, 'account/edit-bio.html', {'bio_form': bio_form, 'skills_form': skills_form})
 
 
+# add project
+def add_project(request):
+    # user = User.objects.get(id=user_id)
+    user = request.user
+    
+    if request.method == 'POST':
+        project_form = ProjectUpdateForm(data=request.POST, files=request.FILES)
+        if project_form.is_valid():
+            new_project = project_form.save(commit=False)
+            new_project.user = user
+            new_project.save()
+            return redirect('profile', user.id)
+    else:
+        project_form = ProjectUpdateForm()
+    context = {'project_form': project_form}
+    return render(request, 'account/add-project.html', context)
+    
 
+# user = request.user
+#  Edit an existing project
+# project = Project.objects.get(id=project_id)
+# project.user = user
+
+
+# Edit project 
+@login_required
+def edit_project(request, project_id):
+    project = Project.objects.get(id=project_id)
+    if request.method == 'POST':
+        project_form = ProjectUpdateForm(instance=project, data=request.POST, files=request.FILES)
+        if project_form.is_valid():
+            project_form.save()
+            return redirect('index')
+    else:
+        project_form = ProjectUpdateForm(instance=project)
+    context = {'project_form':project_form, 'project': project}
+    return render(request, 'account/add-project.html', context)

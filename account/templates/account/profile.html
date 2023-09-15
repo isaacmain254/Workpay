@@ -6,7 +6,8 @@
 <div class="container-fluid bg-secondary bg-opacity-10 pb-5" style="margin-top: 4%;">
     <section class="container h-100 ">
         <div class="position-relative py-3">
-            <a class="link-dark link-underline-opacity-0" href="#"><i class="fa-solid fa-arrow-left pe-2"></i>Back</a>
+            <a class="link-dark link-underline-opacity-0" href="{% url 'jobs' %}"><i
+                    class="fa-solid fa-arrow-left pe-2"></i>Back</a>
             <a href="#" class="position-absolute end-0 link-dark link-underline-opacity-0"><i
                     class="fa-solid fa-share-nodes pe-2"></i>Share
                 profile</a>
@@ -27,7 +28,7 @@
                             {{ user.last_name }}</p>
                         <span class=" fw-light fs-6 ">{{ bio.profession }}</span>
                         <!-- Edit profile -->
-                        <a href="{% url 'edit' %}" class="btn btn-outline-success rounded-pill my-3" type="button">Edit
+                        <a href="{% url 'edit'  %}" class="btn btn-outline-success rounded-pill my-3" type="button">Edit
                             Profile</a>
                     </div>
 
@@ -61,7 +62,8 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="text-dark">About me</h4>
                         <!-- Edit bio -->
-                        <a href="{% url 'edit-bio' %}" class="btn btn-outline-success rounded-pill" type="button">Edit
+                        <a href="{% url 'edit-bio' request.user.id %}" class="btn btn-outline-success rounded-pill"
+                            type="button">Edit
                             bio</a>
                     </div>
                     <p class=""> {{ bio.bio }} </p>
@@ -73,33 +75,33 @@
                     <div class="d-flex flex-wrap gap-3">
                         {% for skill in skills %}
                         <span class="border border-success py-2 px-3 rounded-pill m1">{{ skill.title }}</span>
-                        <!-- <span class="border border-success py-2 px-3  rounded-pill m1">UI</span>
-                        <span class="border border-success py-2 px-3  rounded-pill m1">UX</span>
-                        <span class="border border-success py-2 px-3  rounded-pill m1">Adobe XD</span>
-                        <span class="border border-success py-2 px-3  rounded-pill m1">Wireframing</span>
-                        <span class="border border-success py-2 px-3  rounded-pill m1">User Research</span>
-                        <span class="border border-success py-2 px-3  rounded-pill m1">Mobile Design</span> -->
                         {% endfor %}
                     </div>
                 </div>
 
                 <!-- Project section -->
                 <div class="bg-light rounded-1 w-100 my-4 p-3 ">
-                    <h4>Projects</h4>
+                    <div class="d-flex justify-content-between my-3">
+                        <h4>Projects</h4>
+                        <a href="{% url 'add-project' %}" class="btn btn-outline-success rounded-pill" type="button"><i
+                                class="fa-solid fa-plus"></i> Add Project</a>
+                    </div>
                     <div class="d-flex flex-wrap gap-5">
                         {% for project in projects %}
-                        <div class="card text-center  border-success ">
-                            {% if project.project_image %}
-                            <img src="{{ project.project_image.url }}" class="card-img-top d-block mx-auto"
-                                style="width: 12rem; height: 12rem;" alt="{{ project.title }}">
-                            {% else %}
-                            <img src="{% static 'images/thumbnail.svg' %}" class="card-img-top d-block mx-auto"
-                                style="width: 12rem; height: 12rem;" alt="{{ project.title }}">
-                            {% endif %}
-                            <div class="card-body">
-                                <p class="card-text">{{ project.title }}</p>
+                        <a href="{% url 'edit-project' project.id %}">
+                            <div class="card text-center  border-success ">
+                                {% if project.project_image %}
+                                <img src="{{ project.project_image.url }}" class="card-img-top d-block mx-auto"
+                                    style="width: 12rem; height: 12rem;" alt="{{ project.title }}">
+                                {% else %}
+                                <img src="{% static 'images/thumbnail.svg' %}" class="card-img-top d-block mx-auto"
+                                    style="width: 12rem; height: 12rem;" alt="{{ project.title }}">
+                                {% endif %}
+                                <div class="card-body">
+                                    <p class="card-text">{{ project.title }}{{ project.id }}</p>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                         {% endfor %}
                     </div>
                 </div>

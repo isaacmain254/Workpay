@@ -43,7 +43,7 @@ class SkillsEditForm(forms.ModelForm):
         model = Skill
         fields = ['title']
 
-class ProjectEditForm(forms.ModelForm):
+class ProjectUpdateForm(forms.ModelForm):
     class Meta:
         model = Project
         fields = ['title', 'description', 'project_image']
