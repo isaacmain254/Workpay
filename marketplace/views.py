@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import Job, RequiredSkill
+from account.models import Bio, Profile 
 
 # Create your views here.
 def index(request):
@@ -11,6 +12,8 @@ def index(request):
 def client_page(request):
 
     freelancers = User.objects.all()
+    print(freelancers)
+    
     freelancers_count = freelancers.count()
     context = {'freelancers': freelancers, 'freelancers_count': freelancers_count}
     return render(request, 'marketplace/freelancers.html', context)

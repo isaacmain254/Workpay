@@ -70,6 +70,7 @@
                     <h4>Top results</h4>
                     <!-- freelancer container -->
                     {% for freelancer in freelancers %}
+
                     <div>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex gap-3">
@@ -87,18 +88,17 @@
                                     class="fw-light text-secondary fs-6">per hour</span></p>
                         </div>
 
-                        <h6 class="text-success py-1 ">{{freelancer.}}</h6>
+                        {% if freelancer.bio %}
+                        <!-- bio objects exists -->
+                        <h6 class="text-success py-1 ">{{ freelancer.bio.profession }}</h6>
                         <p class="fs-6 fw-light">
-                            Full stack product designer with hands on experiance in solving problem for clients ranging
-                            from
-                            Real Estate, Hospitality, Rentals , HealthCare, IT Sevices & Social Network among others.
-                            I've
-                            great
-                            communication skills, well-defined processing of information and keen to details, a toolkit
-                            for
-                            collaboration and user centered approach in design ... <a href="#"
-                                class="link link-success">more</a>
+                            {{ freelancer.bio.bio }}
                         </p>
+                        {% else %}
+                        <!-- Bio object is missing or empty -->
+                        <p>No bio information available</p>
+                        {% endif %}
+
                         <a href="#" class="btn btn-success rounded-1" type="button">
                             Request Quote
                         </a>
