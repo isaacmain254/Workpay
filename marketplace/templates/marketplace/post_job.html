@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Post job {% endblock %}
+
+
+{% block content %}
+<div class="container-fluid bg-secondary bg-opacity-10 pb-5" style="margin-top: 4%;">
+    <section class=" container h-100 py-3">
+
+        <h3 class="text-center">Post a job </h3>
+        <form method="POST" enctype="multipart/form-data" class="w-75 mx-auto">
+            {% csrf_token %}
+            {{ form|crispy }}
+
+            <input type="submit" value="Post Job" class="btn btn-success my-3">
+
+        </form>
+    </section>
+</div>
+
+{% endblock %}

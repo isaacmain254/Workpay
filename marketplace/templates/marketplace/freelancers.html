@@ -1,0 +1,224 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid bg-secondary bg-opacity-10 pb-5" style="margin-top: 4%;">
+    <section class=" container h-100 py-3">
+        <h3 class="">Browse freelancers</h3>
+        <div class="row ">
+            <!-- LHS of grid -->
+            <div class="col-3">
+                <div class="d-flex justify-content-between my-2">
+                    <p>Filters</p>
+                    <i class="fa-solid fa-filter"></i>
+                </div>
+                </h5>
+                <!-- filters -->
+                <div class="bg-light rounded-1 w-100 p-3">
+                    <p class="position-relative">Houry rate <span
+                            class="position-absolute end-0 text-success ">clear</span></p>
+                    <div class="d-flex justify-content-between"><span>min</span> <span>max</span></div>
+                    <div class="row">
+                        <div class="col">
+                            <div class='input-group date'>
+                                <input type='number' name="jhg" class="form-control" min="0" />
+                                <span class="px-3">to</span>
+                                <input type='number' name="fhgf" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <p class="position-relative pt-3 ">Skills<span
+                            class="position-absolute end-0 text-success ">clear</span></p>
+                    <input type="text" name="q" placeholder="Search skills" class="form-control rounded-1">
+                    <div>
+                        <div class="form-check pb-1 pt-3">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                UI design
+                            </label>
+                        </div>
+                        <div class="form-check pb-1">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Mobile App Development
+                            </label>
+                        </div>
+                        <div class="form-check pb-1">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Web design
+                            </label>
+                        </div>
+                        <div class="form-check pb-1">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Article writing
+                            </label>
+                        </div>
+                    </div>
+                    <p class="position-relative pt-3 ">Countries<span
+                            class="position-absolute end-0 text-success ">clear</span></p>
+                    <input type="text" name="q" placeholder="Search Countries" class="form-control rounded-1">
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="d-flex justify-content-between my-2">
+                    <p>{{ freelancers_count }} Freelancers</p>
+                    <a href="{% url 'post-job' %}" class="btn btn-success">Post Project</a>
+                </div>
+                <div class="bg-light rounded-1 w-100 p-3">
+                    <h4>Top results</h4>
+                    <!-- freelancer container -->
+                    {% for freelancer in freelancers %}
+
+                    <div>
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex gap-3">
+                                <img class="rounded-1" src="{{ freelancer.profile.profile_image.url }}" width="70"
+                                    height="70" alt="">
+                                <div>
+
+                                    <a href="{% url 'profile' freelancer.id  %}" class="link link-success">
+                                        {{ freelancer.first_name }} {{ freelancer.last_name }}</a>
+                                    <span class="fw-light text-secondary">@{{ freelancer.username }}</span>
+                                    <p>{{ freelancer.profile.city }}, {{ freelancer.profile.country }}</p>
+                                </div>
+                            </div>
+                            <p class="fw-semibold text-success fs-5 lh-sm">$ {{ freelancer.profile.bio.hourly_rate }}
+                                <br> <span class="fw-light text-secondary fs-6">per hour</span>
+                            </p>
+                        </div>
+
+                        <h6 class="text-success py-1 ">{{freelancer.profile.bio.profession }}</h6>
+                        <p class="fs-6 fw-light">
+                            {{ freelancer.profile.bio.description }}
+                        </p>
+                        <a href="#" class="btn btn-success rounded-1" type="button">
+                            Request Quote
+                        </a>
+                        <hr>
+                    </div>
+                    {% endfor %}
+                    <div>
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex gap-3">
+                                <img class="rounded-1" src="{% static 'images/mainawambui.jpg'%}" width="70" height="70"
+                                    alt="">
+                                <div>
+                                    <a href="#" class="link link-success">maina Wambui</a>
+                                    <span class="fw-light text-secondary">@username</span>
+                                    <p>Nairobi, Kenya</p>
+                                </div>
+                            </div>
+                            <p class="fw-semibold text-success fs-5 lh-sm">$ 300 <br> <span
+                                    class="fw-light text-secondary fs-6">per
+                                    hour</span></p>
+                        </div>
+
+                        <h6 class="text-success py-1 ">UI/UX Designer</h6>
+                        <p class="fs-6 fw-light">
+                            Full stack product designer with hands on experiance in solving problem for clients ranging
+                            from
+                            Real Estate, Hospitality, Rentals , HealthCare, IT Sevices & Social Network among others.
+                            I've
+                            great
+                            communication skills, well-defined processing of information and keen to details, a toolkit
+                            for
+                            collaboration and user centered approach in design ... <a href="#"
+                                class="link link-success">more</a>
+                        </p>
+                        <a href="#" class="btn btn-success rounded-1" type="button">
+                            Request Quote
+                        </a>
+                        <hr>
+                    </div>
+                    <div>
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex gap-3">
+                                <img class="rounded-1" src="{% static 'images/mainawambui.jpg'%}" width="70" height="70"
+                                    alt="">
+                                <div>
+                                    <p class="text-success">maina Wambui <span
+                                            class="fw-light text-secondary">@username</span></p>
+                                    <p>Nairobi, Kenya</p>
+                                </div>
+                            </div>
+                            <p class="fw-semibold text-success fs-5 lh-sm">$ 300 <br> <span
+                                    class="fw-light text-secondary fs-6">per
+                                    hour</span></p>
+                        </div>
+
+                        <h6 class="text-success py-1 ">UI/UX Designer</h6>
+                        <p class="fs-6 fw-light">
+                            Full stack product designer with hands on experiance in solving problem for clients ranging
+                            from
+                            Real Estate, Hospitality, Rentals , HealthCare, IT Sevices & Social Network among others.
+                            I've
+                            great
+                            communication skills, well-defined processing of information and keen to details, a toolkit
+                            for
+                            collaboration and user centered approach in design ... <a href="#"
+                                class="link link-success">more</a>
+                        </p>
+                        <a href="#" class="btn btn-success rounded-1" type="button">
+                            Request Quote
+                        </a>
+                        <hr>
+                    </div>
+                    <div>
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex gap-3">
+                                <img class="rounded-1" src="{% static 'images/mainawambui.jpg'%}" width="70" height="70"
+                                    alt="">
+                                <div>
+                                    <p class="text-success">maina Wambui <span
+                                            class="fw-light text-secondary">@username</span></p>
+                                    <p>Nairobi, Kenya</p>
+                                </div>
+                            </div>
+                            <p class="fw-semibold text-success fs-5 lh-sm">$ 300 <br> <span
+                                    class="fw-light text-secondary fs-6">per
+                                    hour</span></p>
+                        </div>
+
+                        <h6 class="text-success py-1 ">UI/UX Designer</h6>
+                        <p class="fs-6 fw-light">
+                            Full stack product designer with hands on experiance in solving problem for clients ranging
+                            from
+                            Real Estate, Hospitality, Rentals , HealthCare, IT Sevices & Social Network among others.
+                            I've
+                            great
+                            communication skills, well-defined processing of information and keen to details, a toolkit
+                            for
+                            collaboration and user centered approach in design ... <a href="#"
+                                class="link link-success">more</a>
+                        </p>
+                        <a href="#" class="btn btn-success rounded-1" type="button">
+                            Request Quote
+                        </a>
+                        <hr>
+                    </div>
+
+                </div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
