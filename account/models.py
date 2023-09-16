@@ -24,7 +24,7 @@ class Bio(models.Model):
     hourly_rate = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
     def __str__(self):
-        return f'{self.user}'
+        return f'{self.profile}'
     
 class Skill(models.Model):
     bio = models.ForeignKey(Bio, on_delete=models.CASCADE)

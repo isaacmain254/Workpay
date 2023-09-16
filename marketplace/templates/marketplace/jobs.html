@@ -104,10 +104,10 @@
             <div class="col-3">
                 <div class="bg-light rounded-1 p-2 mb-3">
                     <div class="d-flex justify-content-center align-items-center flex-column">
-                        <img class="img-fluid rounded-circle" src="{% static 'images/mainawambui.jpg' %}" width="70"
+                        <img class="img-fluid rounded-circle" src="{{ user.profile.profile_image.url }}" width="70"
                             height="70" alt="" />
-                        <span class="fw-bold fs-6 pt-2 text-success">Maina Wambui</span>
-                        <span class="fw-light fs-6">UI/UX Designer</span>
+                        <span class="fw-bold fs-6 pt-2 text-success">{{ user.username }}</span>
+                        <span class="fw-light fs-6">{{ user.profile.bio.profession }}</span>
                         <!-- Edit profile -->
                         <a href="{% url 'profile' request.user.id %}" class="btn btn-outline-success rounded-2 my-3"
                             type="button">

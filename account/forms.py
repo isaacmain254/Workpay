@@ -36,7 +36,7 @@ class ProfileEditForm(forms.ModelForm):
 class BioEditForm(forms.ModelForm):
     class Meta:
         model = Bio
-        fields= ['profession', 'bio', 'hourly_rate']
+        fields= ['profession', 'description', 'hourly_rate']
 
 class SkillsEditForm(forms.ModelForm):
     class Meta:

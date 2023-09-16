@@ -64,7 +64,7 @@
             <div class="col-9">
                 <div class="d-flex justify-content-between my-2">
                     <p>{{ freelancers_count }} Freelancers</p>
-                    <button class="btn btn-success">Post Project</button>
+                    <a href="{% url 'post-job' %}" class="btn btn-success">Post Project</a>
                 </div>
                 <div class="bg-light rounded-1 w-100 p-3">
                     <h4>Top results</h4>
@@ -77,27 +77,20 @@
                                     height="70" alt="">
                                 <div>
 
-                                    <a href="#" class="link link-success">
+                                    <a href="{% url 'profile' freelancer.id  %}" class="link link-success">
                                         {{ freelancer.first_name }} {{ freelancer.last_name }}</a>
                                     <span class="fw-light text-secondary">@{{ freelancer.username }}</span>
                                     <p>{{ freelancer.profile.city }}, {{ freelancer.profile.country }}</p>
                                 </div>
                             </div>
-                            <p class="fw-semibold text-success fs-5 lh-sm">$ {{ freelancer.bio.hourly_rate }} <br> <span
-                                    class="fw-light text-secondary fs-6">per hour</span></p>
+                            <p class="fw-semibold text-success fs-5 lh-sm">$ {{ freelancer.profile.bio.hourly_rate }}
+                                <br> <span class="fw-light text-secondary fs-6">per hour</span>
+                            </p>
                         </div>
 
-                        <h6 class="text-success py-1 ">{{freelancer.}}</h6>
+                        <h6 class="text-success py-1 ">{{freelancer.profile.bio.profession }}</h6>
                         <p class="fs-6 fw-light">
-                            Full stack product designer with hands on experiance in solving problem for clients ranging
-                            from
-                            Real Estate, Hospitality, Rentals , HealthCare, IT Sevices & Social Network among others.
-                            I've
-                            great
-                            communication skills, well-defined processing of information and keen to details, a toolkit
-                            for
-                            collaboration and user centered approach in design ... <a href="#"
-                                class="link link-success">more</a>
+                            {{ freelancer.profile.bio.description }}
                         </p>
                         <a href="#" class="btn btn-success rounded-1" type="button">
                             Request Quote
