@@ -10,8 +10,9 @@ class Profile(models.Model):
     phone_number = PhoneNumberField(blank=True)
     country = models.CharField(max_length=200, blank=True)
     city = models.CharField(max_length=200, blank=True)
-    # created = 
-
+    created =models.DateTimeField(auto_now_add=True)
+    class Meta:
+        ordering = ['created']
 
     def __str__(self):
         return f' {self.user.username}'
