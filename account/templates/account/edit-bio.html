@@ -13,7 +13,7 @@
             {% csrf_token %}
             {{ bio_form|crispy }}
             <span>Skills</span>
-            {{ skills_form |crispy }}
+            {{ skills_formset |crispy }}
 
             <input type="submit" value="Save changes" class="btn btn-success my-3">
 

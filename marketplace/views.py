@@ -31,7 +31,7 @@ def jobs_page(request):
     skill_set = request.GET.get('skill') 
     q = request.GET.get('q') 
     check = request.GET.get('check')
-    if q or skill_set:
+    if q :
         jobs = Job.objects.filter(Q(title__icontains=q) | Q(description__icontains=q))
     elif skill_set:
         jobs = Job.objects.filter(Q(title__icontains=skill_set) | Q(description__icontains=skill_set)  )

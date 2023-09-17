@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm,BioEditForm, SkillsEditForm, ProjectUpdateForm
+from django.forms import modelformset_factory, inlineformset_factory, formset_factory
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
@@ -57,20 +58,20 @@ def login_success(request):
 # edit user profile details view
 @login_required
 def edit(request):
-    print(request.user)
-    print(request.user.profile)
     if request.method == 'POST':
-        user_form =UserEditForm(instance=request.user, data=request.POST)
+        user_form = UserEditForm(instance=request.user, data=request.POST)
         profile_form = ProfileEditForm(instance=request.user.profile, data=request.POST, files=request.FILES)
 
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
-            profile_form.save()
-        return redirect('index')
-
-    else: 
+            profile_form.save()  # Save the profile form if it's valid
+            return redirect('profile', request.user.id)
+        else:
+            print('Form is not valid. Failed to save!!')
+    else:
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(instance=request.user.profile)
+
     context = {'user_form': user_form, 'profile_form': profile_form}
     return render(request, 'account/edit.html', context)
 
@@ -87,21 +88,34 @@ def user_profile(request, user_id):
 # edit user profession details(bio)
 @login_required
 def edit_bio(request, user_id): 
-    bio = Bio.objects.get(profile_id=user_id)
-    
+    bio = get_object_or_404(Bio, id=user_id)
+    skills = bio.skill_set.all()
+
+    SkillsFormSet = modelformset_factory(Skill, form=SkillsEditForm, extra=1, can_delete=True)
+
     if request.method == 'POST':
         bio_form = BioEditForm(instance=bio, data=request.POST)
-        # skills_form = SkillsEditForm(instance=skills, data=request.POST)
+        skills_formset = SkillsFormSet(request.POST, prefix='skills', queryset=skills)
 
-        if bio_form.is_valid():
+        if bio_form.is_valid() and skills_formset.is_valid():
             bio_form.save()
-            # skills_form.save()
+
+            # Save skills with the correct bio reference
+            new_skills = skills_formset.save(commit=False)
+            for skill in new_skills:
+                skill.bio = bio
+                skill.save()
+
+            skills_formset.save_m2m()  # Save many-to-many relationships
+
             return redirect('profile', bio.profile_id)
-        
     else:
         bio_form = BioEditForm(instance=bio)
-        # skills_form = SkillsEditForm(instance=skills)
-    return render(request, 'account/edit-bio.html', {'bio_form': bio_form})
+        skills_formset = SkillsFormSet(prefix='skills', queryset=skills)
+
+    context = {'bio_form': bio_form, 'skills_formset': skills_formset}
+    return render(request, 'account/edit-bio.html', context)
+
 
 
 # add project

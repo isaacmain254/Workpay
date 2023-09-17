@@ -6,3 +6,8 @@ class JobPostForm(forms.ModelForm):
     class Meta:
         model = Job
         fields = ['title', 'description', 'required_skills', 'budget']
+
+class SkillForm(forms.ModelForm):
+    class Meta:
+        model = RequiredSkill
+        fields = ['required_skill']
