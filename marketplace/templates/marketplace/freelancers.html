@@ -69,7 +69,7 @@
                 <div class="bg-light rounded-1 w-100 p-3">
                     <h4>Top results</h4>
                     <!-- freelancer container -->
-                    {% for freelancer in freelancers %}
+                    {% for freelancer in page_obj %}
 
                     <div>
                         <div class="d-flex justify-content-between">
@@ -99,124 +99,10 @@
                         <hr>
                     </div>
                     {% endfor %}
-                    <div>
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex gap-3">
-                                <img class="rounded-1" src="{% static 'images/mainawambui.jpg'%}" width="70" height="70"
-                                    alt="">
-                                <div>
-                                    <a href="#" class="link link-success">maina Wambui</a>
-                                    <span class="fw-light text-secondary">@username</span>
-                                    <p>Nairobi, Kenya</p>
-                                </div>
-                            </div>
-                            <p class="fw-semibold text-success fs-5 lh-sm">$ 300 <br> <span
-                                    class="fw-light text-secondary fs-6">per
-                                    hour</span></p>
-                        </div>
 
-                        <h6 class="text-success py-1 ">UI/UX Designer</h6>
-                        <p class="fs-6 fw-light">
-                            Full stack product designer with hands on experiance in solving problem for clients ranging
-                            from
-                            Real Estate, Hospitality, Rentals , HealthCare, IT Sevices & Social Network among others.
-                            I've
-                            great
-                            communication skills, well-defined processing of information and keen to details, a toolkit
-                            for
-                            collaboration and user centered approach in design ... <a href="#"
-                                class="link link-success">more</a>
-                        </p>
-                        <a href="#" class="btn btn-success rounded-1" type="button">
-                            Request Quote
-                        </a>
-                        <hr>
-                    </div>
-                    <div>
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex gap-3">
-                                <img class="rounded-1" src="{% static 'images/mainawambui.jpg'%}" width="70" height="70"
-                                    alt="">
-                                <div>
-                                    <p class="text-success">maina Wambui <span
-                                            class="fw-light text-secondary">@username</span></p>
-                                    <p>Nairobi, Kenya</p>
-                                </div>
-                            </div>
-                            <p class="fw-semibold text-success fs-5 lh-sm">$ 300 <br> <span
-                                    class="fw-light text-secondary fs-6">per
-                                    hour</span></p>
-                        </div>
-
-                        <h6 class="text-success py-1 ">UI/UX Designer</h6>
-                        <p class="fs-6 fw-light">
-                            Full stack product designer with hands on experiance in solving problem for clients ranging
-                            from
-                            Real Estate, Hospitality, Rentals , HealthCare, IT Sevices & Social Network among others.
-                            I've
-                            great
-                            communication skills, well-defined processing of information and keen to details, a toolkit
-                            for
-                            collaboration and user centered approach in design ... <a href="#"
-                                class="link link-success">more</a>
-                        </p>
-                        <a href="#" class="btn btn-success rounded-1" type="button">
-                            Request Quote
-                        </a>
-                        <hr>
-                    </div>
-                    <div>
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex gap-3">
-                                <img class="rounded-1" src="{% static 'images/mainawambui.jpg'%}" width="70" height="70"
-                                    alt="">
-                                <div>
-                                    <p class="text-success">maina Wambui <span
-                                            class="fw-light text-secondary">@username</span></p>
-                                    <p>Nairobi, Kenya</p>
-                                </div>
-                            </div>
-                            <p class="fw-semibold text-success fs-5 lh-sm">$ 300 <br> <span
-                                    class="fw-light text-secondary fs-6">per
-                                    hour</span></p>
-                        </div>
-
-                        <h6 class="text-success py-1 ">UI/UX Designer</h6>
-                        <p class="fs-6 fw-light">
-                            Full stack product designer with hands on experiance in solving problem for clients ranging
-                            from
-                            Real Estate, Hospitality, Rentals , HealthCare, IT Sevices & Social Network among others.
-                            I've
-                            great
-                            communication skills, well-defined processing of information and keen to details, a toolkit
-                            for
-                            collaboration and user centered approach in design ... <a href="#"
-                                class="link link-success">more</a>
-                        </p>
-                        <a href="#" class="btn btn-success rounded-1" type="button">
-                            Request Quote
-                        </a>
-                        <hr>
-                    </div>
 
                 </div>
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                {% include 'marketplace/pagination.html' %}
             </div>
         </div>
     </section>
