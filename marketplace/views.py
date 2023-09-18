@@ -4,13 +4,36 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.core.mail import send_mail
+
+
 from .models import Job, RequiredSkill
-from .forms import JobPostForm
+from .forms import JobPostForm, ContactForm
 from account.models import Profile, Bio, Skill
 
-# Create your views here.
+
+
+#landing page also handles form submission and sending email
 def index(request):
-    return render(request, 'marketplace/index.html')
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            sender_email = form.cleaned_data['email']
+            subject = form.cleaned_data["subject"]
+            message = form.cleaned_data['message']
+            # recipient_list = ['elliotlinkon@gmail.com'] 
+            send_mail(subject, message, sender_email, ['elliotlinkon@gmail.com'])
+            messages.success(request, "Email sent successfully" )
+            return redirect('email-success')
+    else:
+        form = ContactForm()
+    return render(request, 'marketplace/index.html', {'form': form})
+
+
+# Email success
+def email_success(request):
+    return render(request, 'marketplace/email_success.html')
+
 
 @login_required
 def client_page(request):
