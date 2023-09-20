@@ -37,9 +37,11 @@ INTERNAL_IPS = [
 # Application definition
 
 INSTALLED_APPS = [
+     "daphne",
     # my apps
     'marketplace',
     'account',
+    'chat',
     # 3rd party apps
     "crispy_forms",
     "crispy_bootstrap5",
@@ -53,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
 ]
 
 MIDDLEWARE = [
@@ -84,7 +87,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'work_pay.wsgi.application'
+# WSGI_APPLICATION = 'work_pay.wsgi.application'
+ASGI_APPLICATION = 'work_pay.asgi.application'
 
 
 # Database
@@ -181,3 +185,15 @@ MESSAGE_TAGS = {
         messages.WARNING: 'alert-warning',
         messages.ERROR: 'alert-danger',
  }
+
+# channel layer
+CHANNEL_LAYERS = {
+    "default": {
+        # development only                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+        # production
+        # "CONFIG": {
+        #     "hosts": [("127.0.0.1", 6379)],
+        # },
+    },
+}

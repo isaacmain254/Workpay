@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Messages {% endblock %}
+
+{% block content %}
+<div class="container-fluid bg-secondary bg-opacity-10 pb-5" style="margin-top: 4%; height: 90vh;">
+    <section class="container py-3">
+        <div class="row ">
+            <!-- LHS column  -->
+            <div class="col-4">
+                <div class="h-100 d-inline-block bg-light rounded-1 w-100 p-3 rounded-1">
+                    <!-- search for user -->
+                    <form action="">
+                        <div class="input-group mb-3 rounded-pill border border-secondary overflow-hidden py-1">
+                            <input type="text" class="form-control  border-0 shadow-none " placeholder="Username"
+                                aria-label="Username" aria-describedby="basic-addon1">
+                            <button type="submit" class="input-group-text border-0" id="basic-addon1">
+                                <i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                    </form>
+                    <!-- style="height: 70vh;" -->
+                    <div class="">
+                        <!-- contacted persons -->
+                        <div class="bg-secondary bg-opacity-10 d-flex mb-3">
+                            <div class="p-2 position-relative">
+                                <img class="img-fluid rounded-circle " src="{% static 'images/mainawambui.jpg' %}"
+                                    width="50" height="50" alt="" />
+                                <p class="rounded-circle position-absolute bottom-0 ms-5"
+                                    style="width: 13px; height: 13px; background-color: #3ab807;">
+                                </p>
+                            </div>
+                            <div class="ms-3">
+                                <p>Maina</p>
+                            </div>
+                        </div>
+                        <div class="bg-secondary bg-opacity-10 d-flex mb-3">
+                            <div class="p-2 position-relative">
+                                <img class="img-fluid rounded-circle " src="{% static 'images/mainawambui.jpg' %}"
+                                    width="50" height="50" alt="" />
+                                <p class="rounded-circle position-absolute bottom-0 ms-5"
+                                    style="width: 13px; height: 13px; background-color: #3ab807;">
+                                </p>
+                            </div>
+                            <div class="ms-3">
+                                <p>Maina</p>
+                            </div>
+                        </div>
+                        <div class="bg-secondary bg-opacity-10 d-flex mb-3">
+                            <div class="p-2 position-relative">
+                                <img class="img-fluid rounded-circle " src="{% static 'images/mainawambui.jpg' %}"
+                                    width="50" height="50" alt="" />
+                                <p class="rounded-circle position-absolute bottom-0 ms-5"
+                                    style="width: 13px; height: 13px; background-color: #3ab807;">
+                                </p>
+                            </div>
+                            <div class="ms-3">
+                                <p>Maina</p>
+                            </div>
+                        </div>
+                        <div class="bg-secondary bg-opacity-10 d-flex mb-3">
+                            <div class="p-2 position-relative">
+                                <img class="img-fluid rounded-circle " src="{% static 'images/mainawambui.jpg' %}"
+                                    width="50" height="50" alt="" />
+                                <p class="rounded-circle position-absolute bottom-0 ms-5"
+                                    style="width: 13px; height: 13px; background-color: #3ab807;">
+                                </p>
+                            </div>
+                            <div class="ms-3">
+                                <p>Maina</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- RHS column  -->
+            <div class="col-8 position-relative bg-light rounded-1">
+                <div class="w-100 d-flex justify-content-between  border border-success" style="height: 70px;">
+                    <div class="d-flex">
+                        <div class="position-relative">
+                            <img class="img-fluid rounded-circle " src="{% static 'images/mainawambui.jpg' %}"
+                                width="50" height="50" alt="" />
+                            <p class="rounded-circle position-absolute bottom-0 ms-5"
+                                style="width: 13px; height: 13px; background-color: #3ab807;">
+                            </p>
+                        </div>
+                        <div class="ms-4">
+                            <span class="fw-semibild fs-5">Links</span><br>
+                            <span class="fw-lighter">last seen 25 min ago</span>
+                        </div>
+
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-phone fa-xl px-4"></i>
+                        <i class="fa-solid fa-video fa-xl "></i>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-ellipsis-vertical fa-xl"></i>
+                    </div>
+                </div>
+
+                <!-- messages -->
+                <div class="border border-success overflow-y-auto" style="height: calc(100% - 130px);">
+                    <div class=" w- mx-4" id="message-container">
+                        <div class="d-flex gap-3 my-3">
+                            <img class="img-fluid rounded-circle " src="{% static 'images/mainawambui.jpg' %}"
+                                width="40" height="40" alt="" />
+                            <div>
+                                <div class="text-bg-secondary px-3 py-1 rounded-pill">Hello world this is just a useless
+                                    text</div>
+                                <small class="fw-lighter">10:45AM today</small>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row-reverse gap-3 my-3">
+                            <img class="img-fluid rounded-circle " src="{% static 'images/mainawambui.jpg' %}"
+                                width="40" height="40" alt="" />
+                            <div class="position-relative">
+                                <div class="text-bg-secondary px-3 py-1 rounded-pill">Hello world this just dummy text
+                                </div>
+                                <small class="fw-lighter position-absolute end-0">10:45AM today</small>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- message input form -->
+
+                <div class=" w-100   position-absolute bottom-0 start-0 end-0 px-3 border border-secondary"
+                    style="height: 60px;">
+                    <form action="" id="message-form" class="">
+                        <div class="input-group border border-secondary rounded-pill overflow-hidden ">
+                            <span class="input-group-text" id="file-attachment-icon"><i
+                                    class="fa-solid fa-paperclip fa-lg"></i></span>
+                            <input type="text" id="message-text" class="form-control  border-0  shadow-none py-2"
+                                placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                            <button type="submit" class="input-group-text  border-0" id="send-message-btn"><i
+                                    class="fa-solid fa-paper-plane fa-lg"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+{% endblock %}
+
+{% block footer %}{% endblock %}
