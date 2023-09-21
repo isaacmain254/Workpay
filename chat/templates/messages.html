@@ -4,6 +4,9 @@
 {% block title %} Messages {% endblock %}
 
 {% block content %}
+{% if user.is_authenticated %}
+<input type="hidden" id="logged-in-user" value="{{ user.id }}">
+{% endif %}
 <div class="container-fluid bg-secondary bg-opacity-10 pb-5" style="margin-top: 4%; height: 90vh;">
     <section class="container py-3">
         <div class="row ">

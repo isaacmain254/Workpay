@@ -1,7 +1,7 @@
 let client = document.getElementById("client");
 let freelancer = document.getElementById("freelancer");
 let joinBtn = document.getElementById("joinBtn");
-joinBtn.disabled = true;
+// joinBtn.disabled = true;
 
 client.addEventListener("change", submitUserGroup);
 freelancer.addEventListener("change", submitUserGroup);
@@ -14,8 +14,4 @@ function submitUserGroup() {
   } else {
     joinBtn.disabled = false;
   }
-}
-
-function buttonClick() {
-  console.log("button clicked");
 }

@@ -87,8 +87,8 @@ TEMPLATES = [
     },
 ]
 
-# WSGI_APPLICATION = 'work_pay.wsgi.application'
-ASGI_APPLICATION = 'work_pay.asgi.application'
+WSGI_APPLICATION = 'work_pay.wsgi.application'
+# ASGI_APPLICATION = 'work_pay.asgi.application'
 
 
 # Database
@@ -185,6 +185,9 @@ MESSAGE_TAGS = {
         messages.WARNING: 'alert-warning',
         messages.ERROR: 'alert-danger',
  }
+
+# channels
+ASGI_APPLICATION = 'work_pay.asgi.application'
 
 # channel layer
 CHANNEL_LAYERS = {
