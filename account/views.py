@@ -30,8 +30,9 @@ def register(request):
             new_user.save()
             # create the user profile 
             Profile.objects.create(user=new_user)
-            # Bio.objects.create(user=new_user)
-            # Skill.objects.create(user_bio=new_user)
+            Bio.objects.create(profile=new_user.profile)
+            Skill.objects.create(bio=new_user.profile.bio)
+            Project.objects.create(bio=new_user.profile.bio)
             # Assign user to a group freelancer/client
             group = Group.objects.get(name=role)
             new_user.groups.add(group)
