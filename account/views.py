@@ -158,3 +158,9 @@ def edit_project(request, project_id):
         project_form = ProjectUpdateForm(instance=project)
     context = {'project_form':project_form, 'project': project}
     return render(request, 'account/add-project.html', context)
+
+# delete project
+def delete_project(request, project_id):
+    project = Project.objects.get(id=project_id)
+    project.delete()
+    return redirect('profile', project.bio_id)

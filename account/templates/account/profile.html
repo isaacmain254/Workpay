@@ -103,6 +103,8 @@
                     <div class="d-flex flex-wrap gap-5">
                         {% for project in projects %}
                         <!-- link to project details -->
+                        <!-- project owner is redirected to edit-project page  -->
+                        <!-- other users just view content -->
 
                         <div class="card text-center  border-success ">
                             {% if project.project_image %}
@@ -113,19 +115,26 @@
                                 style="width: 12rem; height: 12rem;" alt="">
                             {% endif %}
                             <div class="card-body">
+                                <p>{{ project.title }}</p>
+                                <button type="button" class="btn btn-outline-success rounded-1" data-bs-toggle="modal"
+                                    data-bs-target="#project-{{project.id}}">
+                                    view project
+                                </button>
                                 {% if request.user == user %}
-                                <a href="{% url 'edit-project' project.id %}">{{ project.title }}</a>
-                                {% else %}
-                                <a href="#" class="card-text" data-bs-toggle="modal" data-bs-target="#{{project.id}}">
-                                    {{ project.title }}{{ project.id }}
+                                <a class="btn btn-outline-secondary bg-light ms-2"
+                                    href="{% url 'edit-project' project.id %}">
+                                    Edit project
                                 </a>
                                 {% endif %}
+
+
                             </div>
                         </div>
+                      
 
                         <!-- Project modal  -->
-                        <div class="modal fade" id="{{ project.id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
+                        <div class="modal fade" id="project-{{project.id}}" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">

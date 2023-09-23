@@ -14,7 +14,9 @@
             {{ project_form|crispy }}
 
             <input type="submit" value="Submit" class="btn btn-success my-3">
-
+            {% if project %}
+            <a href="{% url 'delete-project' project.id %}" class="btn btn-danger ms-5">Delete</a>
+            {% endif %}
         </form>
         <!-- </div> -->
     </section>
