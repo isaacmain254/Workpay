@@ -43,32 +43,3 @@
 {% endblock %}
 
 {% block footer %}{% endblock %}
-
-<!-- {% if form.errors %}
-    <p>You're username and password din't match.
-        Please try again.
-    </p>
-    {% endif %} -->
-
-
-
-<!-- <form action="{% url 'login' %}" method="post" class="m-3">
-            {% csrf_token %}
-            {{ form|crispy}}
-
-            <p class="text-end"><a href="{% url 'password_reset' %}"
-                    class="link-primary link-underline-opacity-0">Forgot password?</a></p>
-
-            <input type="submit" value="Log In" class="btn btn-success w-100 my-2 fs-5">
-            <input type="hidden" name="next" value="{{ next }}" />
-
-            <p class="text-center my-2">
-                OR
-            </p>
-            <button class="btn btn-outline-success rounded-2 w-100 my-2 fs-5 " type="button">Log In With
-                Google</button>
-            <hr>
-            <p class="text-center fs-6">Don't have an account? <a href="{% url 'register' %}"
-                    class="link-primary link-underline-opacity-0">Sign
-                    Up</a></p>
-        </form> -->

@@ -4,92 +4,76 @@
 {% block title %} Messages {% endblock %}
 
 {% block content %}
-{% if user.is_authenticated %}
-<input type="hidden" id="logged-in-user" value="{{ user.id }}">
-{% endif %}
-<div class="container-fluid bg-secondary bg-opacity-10 pb-5" style="margin-top: 4%; height: 90vh;">
-    <section class="container py-3">
-        <div class="row ">
-            <!-- LHS column  -->
-            <div class="col-4">
-                <div class="h-100 d-inline-block bg-light rounded-1 w-100 p-3 rounded-1">
+
+<!-- current logged in user -->
+<input type="hidden" id="logged-in-user" value="{{ sender.id }}">
+
+<div class="bg-secondary bg-opacity-10 py-4 chat-container">
+    <div class="container h-100 ">
+        <!-- grid container  -->
+        <div class="row h-00 grid-container">
+
+            <!-- LHS column -->
+            <!-- sidebar  -->
+            <div class="col-4 h-100">
+                <div class=" bg-light rounded-1 w-100 h-100 rounded-1">
                     <!-- search for user -->
-                    <form action="">
-                        <div class="input-group mb-3 rounded-pill border border-secondary overflow-hidden py-1">
-                            <input type="text" class="form-control  border-0 shadow-none " placeholder="Username"
+                    <form action="" class=" px-3 py-2 user-search-container">
+                        <div class="input-group mb-3 rounded-pill border border-secondary overflow-hidden ">
+                            <input type="text" class="form-control  border-0 shadow-none py-2" placeholder="Username"
                                 aria-label="Username" aria-describedby="basic-addon1">
                             <button type="submit" class="input-group-text border-0" id="basic-addon1">
                                 <i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                     </form>
-                    <!-- style="height: 70vh;" -->
-                    <div class="">
+
+                    <div class="px-3 w-100 overflow-y-auto">
                         <!-- contacted persons -->
-                        <div class="bg-secondary bg-opacity-10 d-flex mb-3">
-                            <div class="p-2 position-relative">
-                                <img class="img-fluid rounded-circle " src="{% static 'images/mainawambui.jpg' %}"
-                                    width="50" height="50" alt="" />
-                                <p class="rounded-circle position-absolute bottom-0 ms-5"
-                                    style="width: 13px; height: 13px; background-color: #3ab807;">
-                                </p>
-                            </div>
-                            <div class="ms-3">
-                                <p>Maina</p>
-                            </div>
+                        <!-- authenticated user rooms -->
+                        <div id="sidebar">
+
+                            {% for thread_info in thread_info_list %}
+
+                            <a href="{% url 'thread-with-messages' thread_info.thread.id %}">
+                                <div class="d-flex gap-4 border-bottom border-secondary overflow-y-hidden mb-3"
+                                    style="height: 53px;">
+                                    <div class="position-relative">
+                                        <img class="img-fluid rounded-circle "
+                                            src="{{ thread_info.other_user_profile_image }}" width="50" height="50"
+                                            alt="" />
+                                        <p class="rounded-circle position-absolute top-50  end-0"
+                                            style="width: 13px; height: 13px; background-color: #3ab807;">
+                                        </p>
+                                    </div>
+                                    <div class="">
+                                        <p class="lh-1 fw-medium">{{ thread_info.other_user_username }}</p>
+                                    </div>
+                                </div>
+                            </a>
+
+                            {% endfor %}
+
                         </div>
-                        <div class="bg-secondary bg-opacity-10 d-flex mb-3">
-                            <div class="p-2 position-relative">
-                                <img class="img-fluid rounded-circle " src="{% static 'images/mainawambui.jpg' %}"
-                                    width="50" height="50" alt="" />
-                                <p class="rounded-circle position-absolute bottom-0 ms-5"
-                                    style="width: 13px; height: 13px; background-color: #3ab807;">
-                                </p>
-                            </div>
-                            <div class="ms-3">
-                                <p>Maina</p>
-                            </div>
-                        </div>
-                        <div class="bg-secondary bg-opacity-10 d-flex mb-3">
-                            <div class="p-2 position-relative">
-                                <img class="img-fluid rounded-circle " src="{% static 'images/mainawambui.jpg' %}"
-                                    width="50" height="50" alt="" />
-                                <p class="rounded-circle position-absolute bottom-0 ms-5"
-                                    style="width: 13px; height: 13px; background-color: #3ab807;">
-                                </p>
-                            </div>
-                            <div class="ms-3">
-                                <p>Maina</p>
-                            </div>
-                        </div>
-                        <div class="bg-secondary bg-opacity-10 d-flex mb-3">
-                            <div class="p-2 position-relative">
-                                <img class="img-fluid rounded-circle " src="{% static 'images/mainawambui.jpg' %}"
-                                    width="50" height="50" alt="" />
-                                <p class="rounded-circle position-absolute bottom-0 ms-5"
-                                    style="width: 13px; height: 13px; background-color: #3ab807;">
-                                </p>
-                            </div>
-                            <div class="ms-3">
-                                <p>Maina</p>
-                            </div>
-                        </div>
+
 
                     </div>
                 </div>
+
             </div>
-            <!-- RHS column  -->
-            <div class="col-8 position-relative bg-light rounded-1">
-                <div class="w-100 d-flex justify-content-between  border border-success" style="height: 70px;">
+            <!-- RHS column -->
+            <div class=" col-8 position-relative bg-light rounded-1 h-100 ">
+                <div class=" w-100 d-flex justify-content-between align-items-center border-bottom border-success
+                                chat-navbar">
                     <div class="d-flex">
                         <div class="position-relative">
-                            <img class="img-fluid rounded-circle " src="{% static 'images/mainawambui.jpg' %}"
-                                width="50" height="50" alt="" />
+                            <img class="img-fluid rounded-circle " src="{{ other_user_image}}" width="50" height="50"
+                                alt="" />
                             <p class="rounded-circle position-absolute bottom-0 ms-5"
                                 style="width: 13px; height: 13px; background-color: #3ab807;">
                             </p>
                         </div>
                         <div class="ms-4">
-                            <span class="fw-semibild fs-5">Links</span><br>
+                            <span class="fw-semibild fs-5">{{ other_user_name }}</span><br>
                             <span class="fw-lighter">last seen 25 min ago</span>
                         </div>
 
@@ -102,37 +86,61 @@
                         <i class="fa-solid fa-ellipsis-vertical fa-xl"></i>
                     </div>
                 </div>
-
-                <!-- messages -->
-                <div class="border border-success overflow-y-auto" style="height: calc(100% - 130px);">
-                    <div class=" w- mx-4" id="message-container">
-                        <div class="d-flex gap-3 my-3">
-                            <img class="img-fluid rounded-circle " src="{% static 'images/mainawambui.jpg' %}"
-                                width="40" height="40" alt="" />
-                            <div>
-                                <div class="text-bg-secondary px-3 py-1 rounded-pill">Hello world this is just a useless
-                                    text</div>
-                                <small class="fw-lighter">10:45AM today</small>
-                            </div>
-                        </div>
+                <!-- Messages container -->
+                <div class="overflow-y-auto " id="message-container">
+                    {% if current_room %}
+                    <div>
+                        {% for message in chat_messages %}
+                        {% if message.sent_by == request.user %}
                         <div class="d-flex flex-row-reverse gap-3 my-3">
-                            <img class="img-fluid rounded-circle " src="{% static 'images/mainawambui.jpg' %}"
+                            <img class="img-fluid rounded-circle " src="{{ message.sent_by.profile.profile_image.url }}"
                                 width="40" height="40" alt="" />
                             <div class="position-relative">
-                                <div class="text-bg-secondary px-3 py-1 rounded-pill">Hello world this just dummy text
+                                <div class="text-bg-secondary px-3 py-1 rounded-pill">
+                                    {{ message.message }}
                                 </div>
-                                <small class="fw-lighter position-absolute end-0">10:45AM today</small>
+                                <small class="fw-lighter position-absolute end-0">
+                                    {{ message.sent_at|timesince }} ago
+                                </small>
                             </div>
                         </div>
-
+                        {% else %}
+                        <div class="d-flex gap-3 my-3">
+                            <img class="img-fluid rounded-circle " src="{{ message.sent_by.profile.profile_image.url }}"
+                                width="40" height="40" alt="" />
+                            <div id="message-content">
+                                <div class="text-bg-secondary px-3 py-1 rounded-end-pill ">{{ message.message }}</div>
+                                <small class="fw-lighter">{{ message.sent_at|timesince }} ago</small>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
                     </div>
+                    {% endif %}
+                    <!-- <div class="d-flex gap-3 my-3">
+
+                        <div id="message-content">
+                            <div class="text-bg-secondary px-3 py-1 rounded-end-pill ">Hello world
+                                this is just a
+                                useless
+                                text</div>
+                            <small class="fw-lighter">10:45AM today</small>
+                        </div>
+                    </div> -->
+                    <!-- <div class="d-flex flex-row-reverse gap-3 my-3">
+                        <img class="img-fluid rounded-circle " src="{% static 'images/mainawambui.jpg' %}" width="40"
+                            height="40" alt="" />
+                        <div class="position-relative">
+                            <div class="text-bg-secondary px-3 py-1 rounded-pill">Hello world this just
+                                dummy text
+                            </div>
+                            <small class="fw-lighter position-absolute end-0">10:45AM today</small>
+                        </div>
+                    </div> -->
                 </div>
 
-
-                <!-- message input form -->
-
-                <div class=" w-100   position-absolute bottom-0 start-0 end-0 px-3 border border-secondary"
-                    style="height: 60px;">
+                <!-- message input container -->
+                <div class=" w-100 position-absolute bottom-0 start-0 end-0 px-3 py-2 message-input-container">
                     <form action="" id="message-form" class="">
                         <div class="input-group border border-secondary rounded-pill overflow-hidden ">
                             <span class="input-group-text" id="file-attachment-icon"><i
@@ -147,11 +155,9 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+    {{ thread_id|json_script:'thread_id' }}
 </div>
-
-
-
 {% endblock %}
 
 {% block footer %}{% endblock %}

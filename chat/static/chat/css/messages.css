@@ -1,0 +1,29 @@
+.chat-container {
+    margin-top: 4%;
+    height: 90vh;
+    background-color: #3ab807;
+}
+
+.grid-container {
+    height: 100%;
+}
+
+.user-search-container {
+    height: 65px;
+}
+
+.contacts-container {
+    height: calc(100% - 65px);
+}
+
+.chat-navbar {
+    height: 65px;
+}
+
+.message-input-container {
+    height: 60px;
+}
+
+#message-container {
+    height: calc(100% - 125px);
+}

@@ -14,6 +14,7 @@ urlpatterns = [
     path('edit-bio/<int:user_id>/', views.edit_bio, name='edit-bio'),
     path('add-project/', views.add_project, name='add-project'),
     path('edit-project/<int:project_id>/', views.edit_project, name='edit-project'),
+    path('delete-project/<int:project_id>/', views.delete_project, name='delete-project'),
 
     path('select-group/', views.select_group, name='select-group'),
 ]

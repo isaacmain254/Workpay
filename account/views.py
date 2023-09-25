@@ -36,7 +36,8 @@ def register(request):
             # Assign user to a group freelancer/client
             group = Group.objects.get(name=role)
             new_user.groups.add(group)
-            return render(request, 'account/register_done.html', {'new_user': new_user})
+            # return render(request, 'login.html', {'new_user': new_user})
+            return redirect('login')
     else:
         user_form = UserRegistrationForm()
     return render(request, 'account/register.html', {'user_form': user_form})
@@ -138,12 +139,6 @@ def add_project(request):
     context = {'project_form': project_form}
     return render(request, 'account/add-project.html', context)
     
-
-# user = request.user
-#  Edit an existing project
-# project = Project.objects.get(id=project_id)
-# project.user = user
-
 
 # Edit project 
 @login_required

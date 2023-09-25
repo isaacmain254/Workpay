@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.db.models import Q
@@ -75,6 +75,7 @@ def jobs_page(request):
     return render(request, 'marketplace/jobs.html', context)
 
 @login_required
+@permission_required('marketplace.can_add_job', raise_exception=True)
 def post_job(request):
     # Process the form submitted
     if request.method == 'POST':

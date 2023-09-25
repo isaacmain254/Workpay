@@ -1,86 +1,75 @@
 import json 
+from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.consumer import AsyncConsumer
 from channels.generic.websocket import WebsocketConsumer
 from channels.db import database_sync_to_async
-from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
+from .models import ChatMessage, Thread
 
 
-user = get_user_model()
+class ChatConsumer(AsyncWebsocketConsumer):
+    async def connect(self):
+        print('connected')
+        self.room_name = self.scope["url_route"]["kwargs"]["thread_id"]
+        print(self.room_name)
+        self.room_group_name = f"chat_{self.room_name}"
 
-class ChatConsumer(AsyncConsumer):
-    async def websocket_connect(self, event):
-        print('connected', event)
-        user = self.scope['user']
-        chat_room = f'user_chatroom_{user.id}'
-        self.chat_room = chat_room
+        # Join room group
         await self.channel_layer.group_add(
-            chat_room,
+            self.room_group_name,
             self.channel_name
         )
-        await self.send({
-            "type": "websocket.accept",
-        })
-    
-    async def websocket_receive(self, event):
-        print('received', event)
-        received_data = json.loads(event['text'])
-        msg = received_data.get('message')
-        sent_by_id =received_data.get('sent_by')
-        send_to_id = received_data.get('send_to')
-        if not msg:
-            print('Error:: empty message')
-            return False
-        sent_by_user = await self.get_user_objects(sent_by_id)
-        send_to_user = await self.get_user_objects(send_to_id)
 
-        if not sent_by_user:
-            print('Error:: sent by user is incorrect')
-        if not send_to_user:
-            print('Error:: send to user is incorrect')
+        await self.accept()
 
-        other_user_chat_room = f'user_chatroom_{send_to_id}'
-        self_user = self.scope['user']
-        response = {
-            'message': msg,
-            'sent_by': self_user.id,
-        }
-
-        await self.channel_layer.group_send(
-            other_user_chat_room, 
-            {
-                'type': 'chat_message',
-                'text': json.dumps(response)
-            }
+    async def disconnect(self, close_code):
+        print('disconnected')
+        # Leave room group
+        await self.channel_layer.group_discard(
+            self.room_group_name,
+            self.channel_name
         )
+
+
+    async def receive(self, text_data):
+        print('received', text_data)
+        data = json.loads(text_data)
+        message = data["message"]
+        sender_id = data['sender_id']
+
+
+        # save message to the database
+        await self.save_message(message)
+      
         await self.channel_layer.group_send(
-            self.chat_room, 
+            self.room_group_name,
             {
-                'type': 'chat_message',
-                'text': json.dumps(response)
+                "type": "chat_message",
+                "message": message,
+                "sender_id": sender_id,
+                
+
             }
         )
 
-        # await self.send({
-        #     'type': 'websocket.send',
-        #     'text': json.dumps(response)
-        # })
-
-    async def websocket_disconnect(self, event):
-        print('disconnected', event)
-
-    
     async def chat_message(self, event):
-        print('chat_message', event)
-        await self.send({
-            'type': 'websocket.send',
-            'text': event['text']
-        })
+        print('chat message', event)
+        message = event["message"]
+        sender_id = event['sender_id']
+        
 
+        # Send message to WebSocket
+        await self.send(text_data=json.dumps({
+            "message": message,
+            "sender_id": sender_id,
+            
+        }))
+    
+    # save the message to the database
     @database_sync_to_async
-    def get_user_objects(self, user_id):
-        qs = user.objects.filter(id=user_id)
-        if qs.exists():
-            obj = qs.first()
-        else:
-            obj = None
-        return obj
+    def save_message(self, message):
+        thread = Thread.objects.get(id=self.room_name)
+       
+        sent_by = self.scope['user']
+        new_message = ChatMessage.objects.create(message=message, sent_by=sent_by, thread=thread )
+        return new_message
