@@ -22,8 +22,9 @@
             <p class="lead text-center my-2">
                 OR
             </p>
-            <button class="btn btn-outline-success rounded-2 w-100 my-1 fs-5 " type="button">Continue With
-                Google</button>
+            <a href="{% url 'social:begin' 'google-oauth2' %}?role={{ role }}"
+                class="btn btn-outline-success rounded-2 w-100 my-1 fs-5 " type="button">Continue With
+                Google</a>
             <hr>
             <p class="text-center fs-6">Already have an account? <a href="{% url 'login' %}"
                     class="link-primary link-underline-opacity-0">Log In</a></p>

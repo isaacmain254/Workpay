@@ -66,7 +66,9 @@
             <div class="col-9">
                 <div class="d-flex justify-content-between my-2">
                     <p>{{ freelancers_count }} Freelancers</p>
-                    <a href="{% url 'post-job' %}" class="btn btn-success">Post Project</a>
+                    <a href="{% url 'post-job' %}" class="btn btn-success">
+                        <i class="fa-solid fa-plus"></i> Post Project
+                    </a>
                 </div>
                 <div class="bg-light rounded-1 w-100 p-3">
                     <h4>Top results</h4>
@@ -95,7 +97,8 @@
                         <p class="fs-6 fw-light">
                             {{ freelancer.profile.bio.description }}
                         </p>
-                        <a href="{% url 'create_or_open_thread' freelancer.id  %}" class="btn btn-success rounded-1" type="button">
+                        <a href="{% url 'create_or_open_thread' freelancer.id  %}" class="btn btn-success rounded-1"
+                            type="button">
                             Message
                         </a>
                         <hr>

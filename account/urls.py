@@ -7,7 +7,7 @@ urlpatterns = [
     path('', include('django.contrib.auth.urls')),
 
     path('register/', views.register, name='register'),
-    # login redirect
+    # login redirect based on user group
     path('', views.login_success, name='login-success'),
     path('edit/', views.edit, name='edit'),
     path('profile/<int:user_id>/', views.user_profile, name='profile'),

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm,BioEditForm, SkillsEditForm, ProjectUpdateForm
-from django.forms import modelformset_factory, inlineformset_factory, formset_factory
+from django.forms import modelformset_factory
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
@@ -18,7 +18,6 @@ def select_group(request):
 
 def register(request):
     role = request.GET.get('role')
-    print(role)
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
         if user_form.is_valid():
@@ -40,7 +39,7 @@ def register(request):
             return redirect('login')
     else:
         user_form = UserRegistrationForm()
-    return render(request, 'account/register.html', {'user_form': user_form})
+    return render(request, 'account/register.html', {'user_form': user_form, 'role': role})
 
 
 # login redirect view w.r.t user group that is client or freelancer
@@ -124,7 +123,6 @@ def edit_bio(request, user_id):
 def add_project(request):
     # user = User.objects.get(id=user_id)
     user = request.user
-    print(user) 
     
     if request.method == 'POST':
         project_form = ProjectUpdateForm(data=request.POST, files=request.FILES)

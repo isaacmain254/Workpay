@@ -12,6 +12,7 @@
         <form method="POST" enctype="multipart/form-data" class="w-75 mx-auto">
             {% csrf_token %}
             {{ form|crispy }}
+            {{ skills_form|crispy }}
 
             <input type="submit" value="Post Job" class="btn btn-success my-3">
 

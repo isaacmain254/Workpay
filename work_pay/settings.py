@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-0at0nlz&q@g_i22zx4rwxml($hwrb58w8=ub!y2mw#oz5nozr=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['workPay.com', 'localhost', '127.0.0.1']
 INTERNAL_IPS = [
     # ...
     "127.0.0.1",
@@ -42,11 +43,7 @@ INSTALLED_APPS = [
     'marketplace',
     'account',
     'chat',
-    # 3rd party apps
-    "crispy_forms",
-    "crispy_bootstrap5",
-    "phonenumber_field",
-    "debug_toolbar",
+   
     
     # Django apps
     'django.contrib.admin',
@@ -55,6 +52,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+     # 3rd party apps
+    "crispy_forms",
+    "crispy_bootstrap5",
+    "phonenumber_field",
+    "debug_toolbar",
+    'social_django',
 
 ]
 
@@ -67,6 +70,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'work_pay.urls'
@@ -82,6 +87,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                # 'social_django.context_processors.login_redirect'
             ],
         },
     },
@@ -150,9 +157,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Authentication URL's configurations
 LOGIN_REDIRECT_URL = 'login-success'
 
+# Social auth redirect
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'login-success'
+
 LOGIN_URL = 'login'
 
-LOGOUT_URL = 'logout'
+LOGOUT_URL = 'login'
 
 # crispy-form config 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -200,3 +210,30 @@ CHANNEL_LAYERS = {
         # },
     },
 }
+
+# Google client ID
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '662747768788-2a16iep6g8g4bo9hta0euc5rpbrfn83h.apps.googleusercontent.com'
+# Google client secret
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
+# AUTHENTICATION BACKEND
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.google.GoogleOAuth2',
+
+)
+
+SOCIAL_AUTH_FIELDS_STORED_IN_SESSION = ['role']
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.social_auth.associate_by_email',
+    'social_core.pipeline.user.create_user',
+    'account.authentication.create_profile',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+)

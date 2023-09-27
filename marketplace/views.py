@@ -64,7 +64,7 @@ def jobs_page(request):
         jobs = Job.objects.all()
 
     # pagination
-    paginator = Paginator(jobs, 10)
+    paginator = Paginator(jobs,10)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     # skills = RequiredSkill.objects.all()

@@ -28,8 +28,10 @@
             <p class="lead text-center my-2">
                 OR
             </p>
-            <button class="btn btn-outline-success rounded-2 w-100 my-2 fs-5 " type="button">Log In With
-                Google</button>
+            <a href="{% url 'social:begin' 'google-oauth2' %}"
+                class="btn btn-outline-success rounded-2 w-100 my-2 fs-5 " type="button">
+                <i class="fa-brands fa-google"></i> Log In With Google
+            </a>
             <hr>
             <p class="text-center fs-6">Don't have an account?
                 <a href="{% url 'select-group' %}" class="link-primary link-underline-opacity-0">Sign
