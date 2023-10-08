@@ -1,4 +1,4 @@
-# ![workpay logo](static/images/Workpay-removebg-preview.png) workPay
+# ![workpay logo](static/images/Workpay-removebg-preview.png){width=80 height=30} workPay
 ----------------------------------------------------------------------
 
 
@@ -12,24 +12,26 @@ To run the project locally: clone this repository on your computer
     cd Workpay
 ```
 
-create a virtual environment and install all packages from ==requirements.txt==.
+create a virtual environment and install all packages from **requirements.txt**.
 
  Make sure your are in `$ ...Workpay ` directory
 
 
-`python
+```python
+    #create virtual enviroment
     python -m venv venv
-    
+
     #Activate the virtual environment, for linux users
     #for windows users search on how to activate virtual enviroment
     source venv/bin/activate
 
     pip install -r requirements.txt
-`
+```
+
 
 Next makemigrations
 
-`python
+```python
     #makemigrations
     python manage.py makemigrations
 
@@ -41,7 +43,7 @@ Next makemigrations
     
     #start the development server
     python manage.py runserver
-`
+```
 
 Open the project in your browser `localhost:8000/admin/` and login with your superuser credential
 
