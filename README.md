@@ -1,4 +1,4 @@
-# ![workpay logo](static/images/Workpay-removebg-preview.png){width=80 height=30} workPay
+# <img src ="https://github.com/isaacmain254/Workpay/blob/main/static/images/Workpay-removebg-preview.png" width="80" height="30" alt="workpay logo"> workPay
 ----------------------------------------------------------------------
 
 
