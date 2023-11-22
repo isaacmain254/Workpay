@@ -14,15 +14,15 @@ To run the project locally: clone this repository on your computer
 
 create a virtual environment and install all packages from **requirements.txt**.
 
- Make sure your are in `$ ...Workpay ` directory
+ Make sure you are in the `$ ...Workpay ` directory
 
 
 ```python
-    #create virtual enviroment
+    #create a virtual environment
     python -m venv venv
 
-    #Activate the virtual environment, for linux users
-    #for windows users search on how to activate virtual enviroment
+    #Activate the virtual environment, for Linux users
+    # For Windows users search on how to activate a virtual environment
     source venv/bin/activate
 
     pip install -r requirements.txt
@@ -49,8 +49,8 @@ Open the project in your browser `localhost:8000/admin/` and login with your sup
 
 Create 2 groups on the admin dashboard **client** and **freelancer** and assign the super user one group or both 
 
-Every user should be associate with a profile, Bio, Skills and project when registering on the website but since this was created using superuser command you have do it manually on the admin interface
+Every user should be associated with a profile, Bio, Skills, and project when registering on the website but since this was created using the superuser command you have to do it manually on the admin interface
 
-Now you can login into the website `http://workpay.com:8000/`
+Now you can log into the website `http://workpay.com:8000/`
 
 Now you can register other users using the register page
