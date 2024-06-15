@@ -51,6 +51,8 @@ Create 2 groups on the admin dashboard **client** and **freelancer** and assign 
 
 Every user should be associated with a profile, Bio, Skills, and project when registering on the website but since this was created using the superuser command you have to do it manually on the admin interface
 
-Now you can log into the website `http://workpay.com:8000/`
+Now you can log into the website `http://workpay.com:8000/` in order to use Google authentication
+
+> :bulb: **Tip:** If you use `http://localhost:8000/` or `http://127.0.0.1:8000/` you can't authenticate using Google because Google OAuth is configured to redirect to `http://workpay.com:8000/` after login
 
 Now you can register other users using the register page
