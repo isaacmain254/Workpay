@@ -28,7 +28,8 @@ SECRET_KEY = 'django-insecure-0at0nlz&q@g_i22zx4rwxml($hwrb58w8=ub!y2mw#oz5nozr=
 DEBUG = False
 
 # ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = ['workPay.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['workPay.com', 'localhost',
+                 '127.0.0.1', 'mysite-wm0g.onrender.com']
 INTERNAL_IPS = [
     # ...
     "127.0.0.1",
