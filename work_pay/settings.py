@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 from django.contrib.messages import constants as messages
-
+# Import dj-database-url at the beginning of the file.
+import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -38,13 +39,13 @@ INTERNAL_IPS = [
 # Application definition
 
 INSTALLED_APPS = [
-     "daphne",
+    "daphne",
     # my apps
     'marketplace',
     'account',
     'chat',
-   
-    
+
+
     # Django apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,7 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-     # 3rd party apps
+    # 3rd party apps
     "crispy_forms",
     "crispy_bootstrap5",
     "phonenumber_field",
@@ -63,6 +64,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -101,12 +103,15 @@ WSGI_APPLICATION = 'work_pay.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+# Replace the SQLite DATABASES configuration with PostgreSQL:
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+    'default': dj_database_url.config(default='postgresql://client:maina254@localhost:5432/work_pay',  conn_max_age=600)}
 
 
 # Password validation
@@ -147,7 +152,10 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
-
+# Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
+if not DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -164,7 +172,7 @@ LOGIN_URL = 'login'
 
 LOGOUT_URL = 'login'
 
-# crispy-form config 
+# crispy-form config
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
@@ -189,12 +197,12 @@ PHONENUMBER_DEFAULT_REGION = "KE"
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 # connecting bootstrap alert to messages
 MESSAGE_TAGS = {
-        messages.DEBUG: 'alert-secondary',
-        messages.INFO: 'alert-info',
-        messages.SUCCESS: 'alert-success',
-        messages.WARNING: 'alert-warning',
-        messages.ERROR: 'alert-danger',
- }
+    messages.DEBUG: 'alert-secondary',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}
 
 # channels
 ASGI_APPLICATION = 'work_pay.asgi.application'
@@ -202,7 +210,7 @@ ASGI_APPLICATION = 'work_pay.asgi.application'
 # channel layer
 CHANNEL_LAYERS = {
     "default": {
-        # development only                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+        # development only
         "BACKEND": "channels.layers.InMemoryChannelLayer",
         # production
         # "CONFIG": {
