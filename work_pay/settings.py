@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-0at0nlz&q@g_i22zx4rwxml($hwrb58w8=ub!y2mw#oz5nozr='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # ALLOWED_HOSTS = ['*']
 ALLOWED_HOSTS = ['workPay.com', 'localhost', '127.0.0.1']
